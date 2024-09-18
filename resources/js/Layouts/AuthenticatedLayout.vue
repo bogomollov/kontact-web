@@ -1,152 +1,44 @@
 <script setup>
-import { ref } from 'vue';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
-
-const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
-    <div>
-        <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
-                <!-- Primary Navigation Menu -->
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex justify-between h-16">
-                        <div class="flex">
-                            <!-- Logo -->
-                            <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
-                                    <ApplicationLogo
-                                        class="block h-9 w-auto fill-current text-gray-800"
-                                    />
-                                </Link>
-                            </div>
-
-                            <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
-                                </NavLink>
-                            </div>
-                        </div>
-
-                        <div class="hidden sm:flex sm:items-center sm:ms-6">
-                            <!-- Settings Dropdown -->
-                            <div class="ms-3 relative">
-                                <Dropdown align="right" width="48">
-                                    <template #trigger>
-                                        <span class="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
-                                            >
-                                                {{ $page.props.auth.user.name }}
-
-                                                <svg
-                                                    class="ms-2 -me-0.5 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fill-rule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clip-rule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </template>
-
-                                    <template #content>
-                                        <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
-                                        <DropdownLink :href="route('logout')" method="post" as="button">
-                                            Log Out
-                                        </DropdownLink>
-                                    </template>
-                                </Dropdown>
-                            </div>
-                        </div>
-
-                        <!-- Hamburger -->
-                        <div class="-me-2 flex items-center sm:hidden">
-                            <button
-                                @click="showingNavigationDropdown = !showingNavigationDropdown"
-                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
-                            >
-                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                    <path
-                                        :class="{
-                                            hidden: showingNavigationDropdown,
-                                            'inline-flex': !showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                    <path
-                                        :class="{
-                                            hidden: !showingNavigationDropdown,
-                                            'inline-flex': showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Responsive Navigation Menu -->
-                <div
-                    :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }"
-                    class="sm:hidden"
-                >
-                    <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
-
-                    <!-- Responsive Settings Options -->
-                    <div class="pt-4 pb-1 border-t border-gray-200">
-                        <div class="px-4">
-                            <div class="font-medium text-base text-gray-800">
-                                {{ $page.props.auth.user.name }}
-                            </div>
-                            <div class="font-medium text-sm text-gray-500">{{ $page.props.auth.user.email }}</div>
-                        </div>
-
-                        <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')"> Profile </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('logout')" method="post" as="button">
-                                Log Out
-                            </ResponsiveNavLink>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-
-            <!-- Page Heading -->
-            <header class="bg-white shadow" v-if="$slots.header">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <slot name="header" />
-                </div>
-            </header>
-
-            <!-- Page Content -->
-            <main>
-                <slot />
-            </main>
+    <div class="flex items-center justify-between">
+        <Link :href="route('logout')">
+            <svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.3196 8.75501L8.07465 13M8.07465 13L12.3196 17.245M8.07465 13L23.6396 13M16.5646 19.7233V19.7917C16.5646 21.3767 16.5646 22.1697 16.2562 22.7751C15.9849 23.3076 15.5523 23.7402 15.0198 24.0116C14.4144 24.32 13.6213 24.32 12.0364 24.32L5.52737 24.32C3.94242 24.32 3.15106 24.32 2.54569 24.0116C2.01319 23.7402 1.57912 23.3076 1.3078 22.7751C0.999649 22.1703 0.999649 21.3782 0.999649 19.7964L0.999649 6.20294C0.999649 4.6211 0.999649 3.83013 1.3078 3.22535C1.57912 2.69286 2.01319 2.25948 2.54569 1.98816C3.15046 1.68001 3.94143 1.68001 5.52328 1.68001L12.041 1.68001C13.6229 1.68001 14.415 1.68001 15.0198 1.98816C15.5523 2.25948 15.9849 2.69327 16.2562 3.22577C16.5646 3.83114 16.5646 4.62306 16.5646 6.20801V6.27876" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </Link>
+        <div class="flex items-center justify-center gap-15">
+            <div class="rounded-full bg-white flex items-end justify-end" style="height: 60px; width: 60px;">
+                <div class="rounded-full bg-blue mr-1 mb-1 border-dark-gray border" style="height: 12px; width: 12px;"></div>
+            </div>
+            <div class="flex flex-col">
+                <p class="text-white font-semibold text-base">bogomollov.</p>
+                <p class="text-blue font-medium text-p cursor-pointer" @click="copy()">{{ username }}</p>
+                <!-- {{ $page.props.auth.user.name }} -->
+            </div>
         </div>
+        <Link>
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23.0238 9.30619L22.5842 9.06163C22.5159 9.02365 22.4823 9.00459 22.4494 8.98484C22.1215 8.78846 21.8452 8.51714 21.6436 8.19252C21.6233 8.15986 21.6042 8.12561 21.5651 8.05791C21.526 7.9903 21.5062 7.95604 21.4881 7.92212C21.3072 7.5844 21.2093 7.20805 21.2035 6.82499C21.2029 6.78648 21.203 6.74713 21.2043 6.66891L21.2129 6.15839C21.2267 5.34144 21.2336 4.9317 21.1188 4.56398C21.0168 4.23735 20.8462 3.9365 20.6184 3.68119C20.3608 3.3926 20.0044 3.18671 19.2907 2.77546L18.6979 2.43385C17.9862 2.02374 17.6303 1.81862 17.2524 1.74042C16.9182 1.67124 16.5732 1.67444 16.2401 1.74921C15.8642 1.8336 15.5127 2.04407 14.8101 2.46477L14.8061 2.46668L14.3814 2.72101C14.3142 2.76122 14.2802 2.7815 14.2466 2.80021C13.9125 2.98595 13.5396 3.08865 13.1575 3.10091C13.119 3.10214 13.0799 3.10214 13.0015 3.10214C12.9237 3.10214 12.8829 3.10214 12.8445 3.10091C12.4616 3.08859 12.0879 2.98533 11.7533 2.79883C11.7196 2.78004 11.6862 2.7596 11.6189 2.7192L11.1915 2.46257C10.4841 2.03789 10.1298 1.82523 9.75185 1.74042C9.41743 1.66539 9.0713 1.66331 8.73581 1.73339C8.357 1.81251 8.00095 2.01915 7.28886 2.43245L7.28569 2.43385L6.70027 2.77363L6.69379 2.77759C5.9881 3.18716 5.63441 3.39244 5.37905 3.67986C5.15245 3.93491 4.98308 4.23528 4.8817 4.56105C4.76711 4.92927 4.77321 5.33989 4.78702 6.16069L4.7956 6.67048C4.7969 6.74768 4.79915 6.78604 4.79859 6.82401C4.79291 7.20785 4.69378 7.58498 4.51237 7.92329C4.49443 7.95675 4.4751 7.99021 4.4365 8.05704C4.39786 8.12392 4.37916 8.15718 4.35912 8.18946C4.15658 8.5158 3.879 8.78871 3.5491 8.98542C3.51647 9.00488 3.48208 9.02359 3.41451 9.06104L2.98046 9.30157C2.2583 9.70177 1.89731 9.90205 1.63463 10.1871C1.40225 10.4392 1.2267 10.7383 1.11955 11.064C0.998418 11.4321 0.99852 11.845 1.0004 12.6706L1.00193 13.3455C1.00379 14.1656 1.00635 14.5754 1.12775 14.9411C1.23515 15.2646 1.40941 15.5619 1.64049 15.8125C1.90168 16.0958 2.25909 16.2948 2.97577 16.6935L3.40595 16.9328C3.47916 16.9735 3.516 16.9936 3.5513 17.0149C3.87821 17.2118 4.15361 17.4839 4.35443 17.8084C4.37613 17.8434 4.39696 17.8798 4.4386 17.9526C4.47974 18.0244 4.50078 18.0604 4.51981 18.0964C4.69588 18.4297 4.79015 18.8001 4.79658 19.1771C4.79727 19.2178 4.79668 19.259 4.79528 19.3418L4.78702 19.831C4.77312 20.6546 4.76706 21.0669 4.88233 21.4361C4.9843 21.7628 5.15474 22.0636 5.38257 22.3189C5.6401 22.6075 5.99712 22.8133 6.71082 23.2246L7.3035 23.5661C8.0152 23.9762 8.37092 24.1811 8.74875 24.2593C9.08302 24.3285 9.42816 24.3258 9.76123 24.251C10.1377 24.1665 10.4904 23.9553 11.195 23.5334L11.6197 23.2791C11.6869 23.2388 11.721 23.2187 11.7546 23.1999C12.0887 23.0142 12.4613 22.911 12.8433 22.8987C12.8818 22.8975 12.9209 22.8975 12.9993 22.8975C13.0778 22.8975 13.1169 22.8975 13.1555 22.8987C13.5383 22.911 13.9132 23.0146 14.2477 23.2011C14.2772 23.2175 14.3067 23.2352 14.3585 23.2664L14.81 23.5375C15.5175 23.9622 15.871 24.1742 16.249 24.259C16.5834 24.3341 16.9298 24.3371 17.2653 24.2671C17.644 24.188 18.0008 23.9809 18.7125 23.5678L19.3067 23.223C20.0128 22.8131 20.3669 22.6076 20.6224 22.3201C20.849 22.0651 21.0186 21.7648 21.1199 21.439C21.2337 21.0735 21.2268 20.666 21.2132 19.8571L21.2043 19.3295C21.2031 19.2523 21.2029 19.2139 21.2035 19.1759C21.2091 18.7921 21.3066 18.4147 21.4881 18.0764C21.506 18.043 21.5254 18.0092 21.5639 17.9426C21.6026 17.8758 21.6225 17.8424 21.6426 17.8101C21.8451 17.4838 22.123 17.2106 22.4529 17.0139C22.4851 16.9947 22.5183 16.9763 22.5843 16.9398L22.5865 16.9387L23.0206 16.6982C23.7427 16.298 24.1044 16.0975 24.3671 15.8125C24.5995 15.5604 24.7748 15.2617 24.882 14.936C25.0024 14.57 25.0014 14.1595 24.9996 13.3435L24.998 12.6542C24.9962 11.8341 24.9951 11.4244 24.8737 11.0587C24.7663 10.7352 24.5911 10.4379 24.36 10.1872C24.0991 9.90424 23.7412 9.70514 23.0259 9.30722L23.0238 9.30619Z" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8.19851 13.0001C8.19851 15.6521 10.3484 17.8019 13.0004 17.8019C15.6524 17.8019 17.8022 15.6521 17.8022 13.0001C17.8022 10.3481 15.6524 8.1982 13.0004 8.1982C10.3484 8.1982 8.19851 10.3481 8.19851 13.0001Z" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </Link>
     </div>
 </template>
+<script>
+export default {
+    data() {
+        return { username: '@bogomollov'}
+    },
+    methods: {
+        async copy() {
+            try {
+                await navigator.clipboard.writeText(this.username)
+            }
+            catch($e) {}
+        }
+    }
+}
+</script>

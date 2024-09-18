@@ -42,10 +42,11 @@ const submit = () => {
                 <TextInput
                     id="login"
                     type="text"
-                    class="mt-1 block w-full"
+                    class="bg-dark-gray mt-1 block w-full"
                     v-model="form.login"
                     required
                     autocomplete="login"
+                    placeholder="Создайте свой уникальный логин"
                 />
 
                 <InputError class="mt-2" :message="form.errors.login" />
@@ -57,10 +58,11 @@ const submit = () => {
                 <TextInput
                     id="password"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="bg-dark-gray mt-1 block w-full"
                     v-model="form.password"
                     required
                     autocomplete="current-password"
+                    placeholder="Придумайте безопасный пароль"
                 />
 
                 <InputError class="mt-2" :message="form.errors.password" />

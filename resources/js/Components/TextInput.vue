@@ -1,4 +1,7 @@
 <script setup>
+defineProps({
+    placeholder: String,
+});
 const model = defineModel({
     type: String,
     required: true,
@@ -7,7 +10,8 @@ const model = defineModel({
 
 <template>
     <input
-        class="bg-dark-gray border-none focus:ring-gray focus:ring-1 h-48 text-p rounded-10"
+        class="border-none focus:ring-gray focus:ring-1 placeholder:text-gray placeholder:font-medium h-48 font-medium rounded-10"
         v-model="model"
+        :placeholder="placeholder"
     />
 </template>

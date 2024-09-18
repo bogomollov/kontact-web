@@ -32,11 +32,12 @@ const submit = () => {
                 <TextInput
                     id="name"
                     type="text"
-                    class="mt-1 block w-full"
+                    class="bg-dark-gray mt-1 block w-full"
                     v-model="form.name"
                     required
                     autofocus
                     autocomplete="name"
+                    placeholder="Введите свое имя"
                 />
 
                 <InputError class="mt-2" :message="form.errors.name" />
@@ -48,10 +49,11 @@ const submit = () => {
                 <TextInput
                     id="login"
                     type="text"
-                    class="mt-1 block w-full"
+                    class="bg-dark-gray mt-1 block w-full"
                     v-model="form.email"
                     required
                     autocomplete="login"
+                    placeholder="Создайте свой уникальный логин"
                 />
 
                 <InputError class="mt-2" :message="form.errors.login" />
@@ -63,10 +65,11 @@ const submit = () => {
                 <TextInput
                     id="password"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="bg-dark-gray mt-1 block w-full"
                     v-model="form.password"
                     required
                     autocomplete="password"
+                    placeholder="Придумайте безопасный пароль"
                 />
 
                 <InputError class="mt-2" :message="form.errors.password" />
