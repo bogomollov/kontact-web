@@ -1,31 +1,55 @@
-## Запуск проекта
+# Запуск проекта
 
-1. Установка зависимостей Composer
+Удаление ненужных/старых пакетов
+```sh
+sudo apt purge php* && sudo apt remove php*
+sudo apt purge apache* && sudo apt remove apache*
+sudo apt-get purge apache2 apache2-utils apache2-bin apache2.2-common
+sudo apt autoclean && sudo apt autoremove
+```
+
+Установка PHP
+```sh
+sudo apt install software-properties-common -y
+sudo add-apt-repository ppa:ondrej/php -y
+sudo apt update
+sudo apt install php-common && sudo apt install php8.3-cli && sudo apt install php8.3-common && sudo apt install php8.3-opcache && sudo apt install php8.3-readline && sudo apt install php8.3-curl && sudo apt install php8.3-xml && sudo apt install php8.3-dom
+```
+
+Установка Composer
+```sh
+sudo apt purge composer*
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+alias composer='/usr/local/bin/composer'
+```
+
+Установка зависимостей Composer
 ```sh
 composer i
 ```
 
-2. Запуск Laravel Sail
+Запуск Docker Compose
 ```sh
 ./vendor/bin/sail up
 ```
 
-3. Вход в контейнер Laravel
+Вход в контейнер Laravel
 ```sh
-docker exec -it laravel bash
+docker exec -it kontact bash
 ```
 
-4. Запуск миграции таблиц БД
+Обновление и установка зависимостей NPM
 ```sh
-php artisan migrate --seed
+npm update --save
 ```
 
-5. Установка зависимостей NPM
+Запуск миграцию таблиц БД
 ```sh
-npm i
+php artisan migrate
 ```
 
-6. Запуск Vite
+Запуск Vite
 ```sh
 npm run dev
 ```

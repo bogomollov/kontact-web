@@ -3,23 +3,17 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use App\Enums\Departments;
+use App\Enums\Positions;
 
 class UserFactory extends Factory
 {
-    protected static ?string $password;
-
     public function definition(): array
     {
         return [
-            'display_name' => fake()->firstName(),
-            'login' => fake()->userName(),
-            'password' => static::$password ??= Hash::make('password'),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'is_online' => fake()->boolean(),
-            'remember_token' => Str::random(10),
+            'fullname' => fake()->name(),
+            'department' => Departments::getRandomValue(),
+            'position' => Positions::getRandomValue(),
         ];
     }
 
