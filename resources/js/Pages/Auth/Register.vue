@@ -10,6 +10,9 @@ const form = useForm({
     name: '',
     login: '',
     password: '',
+    fullname: '',
+    department: '',
+    email: '',
 });
 
 const submit = () => {
@@ -41,6 +44,54 @@ const submit = () => {
                 />
 
                 <InputError class="mt-2" :message="form.errors.name" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="fullname" value="ФИО" />
+
+                <TextInput
+                    id="fullname"
+                    type="text"
+                    class="bg-dark-gray mt-1 block w-full"
+                    v-model="form.fullname"
+                    required
+                    autocomplete="fullname"
+                    placeholder="Введите ФИО"
+                />
+
+                <InputError class="mt-2" :message="form.errors.fullname" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="department" value="Наименование отдела" />
+
+                <TextInput
+                    id="department"
+                    type="text"
+                    class="bg-dark-gray mt-1 block w-full"
+                    v-model="form.password"
+                    required
+                    autocomplete="department"
+                    placeholder="Введите наименование отдела"
+                />
+
+                <InputError class="mt-2" :message="form.errors.department" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="email" value="Почта" />
+
+                <TextInput
+                    id="email"
+                    type="email"
+                    class="bg-dark-gray mt-1 block w-full"
+                    v-model="form.fullname"
+                    required
+                    autocomplete="email"
+                    placeholder="Введите почту"
+                />
+
+                <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div class="mt-4">

@@ -2,7 +2,7 @@
 import TextInput from '@/Components/TextInput.vue';
 </script>
 <template>
-    <div class="flex flex-col w-full h-screen mr-15">
+    <div class="flex flex-col w-full h-screen mr-15 w-1/2">
         <div class="bg-dark-gray w-full h-[95px] px-30 py-[17.5px] mb-30 rounded-b-10">
             <div class="flex gap-15 items-center">
                 <img src="../../images/0.png">
