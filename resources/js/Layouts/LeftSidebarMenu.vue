@@ -1,15 +1,19 @@
 <script setup>
 import TextInput from '@/Components/TextInput.vue';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import GroupLayout from './GroupLayout.vue';
 </script>
+
 <template>
-    <div class="flex flex-col overflow-y-scroll min-w-[550px] max-w-[650px] resize-x h-screen bg-dark-gray px-15 py-20 gap-30">
-        <AuthenticatedLayout />
+    <GroupLayout />
+    <div class="flex flex-col overflow-y-scroll min-w-[400px] max-w-[550px] resize-x h-screen bg-white px-15 py-20 gap-30">
+        <div class="text-neutral-950">
+            <h3>Домашняя страница</h3>
+        </div>
         <div class="flex">
             <label class="flex-1">
             <TextInput
                 type="search"
-                class="bg-black text-white pl-[58px] block w-full text-base"
+                class="block bg-transparent text-neutral-500 pl-[58px] w-full text-base"
                 placeholder="Поиск"
             />
             </label>
@@ -18,7 +22,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
             <div class="flex items-center justify-between">
                 <div class="flex gap-15">
                     <img src="../../images/avatar.png">
-                    <div class="text-white">
+                    <div class="text-black">
                         <div class="font-semibold text-base">Timothy Chalamet</div>
                         <p class="font-medium text-p line-clamp-1 w-[383px]">Понял, принял</p>
                     </div>
@@ -33,7 +37,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
             <div class="flex items-center justify-between">
                 <div class="flex gap-15">
                     <img src="../../images/avatar1.png">
-                    <div class="text-white">
+                    <div class="text-black">
                         <div class="font-semibold text-base">Dakota Johnson</div>
                         <p class="font-medium text-p line-clamp-1">Можешь помочь мне?</p>
                     </div>
@@ -45,7 +49,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
             <div class="flex items-center justify-between">
                 <div class="flex gap-15">
                     <img src="../../images/avatar2.png">
-                    <div class="text-white">
+                    <div class="text-black">
                         <div class="font-semibold text-base">Rick</div>
                         <p class="font-medium text-p line-clamp-1">Проект доступен на github</p>
                     </div>
@@ -60,7 +64,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
             <div class="flex items-center justify-between">
                 <div class="flex gap-15">
                     <img src="../../images/avatar3.png">
-                    <div class="text-white">
+                    <div class="text-black">
                         <div class="font-semibold text-base">Jerry Ryan</div>
                         <p class="font-medium text-p line-clamp-1">У нас тут чрезвычайное происшествие</p>
                     </div>
@@ -72,7 +76,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
             <div class="flex items-center justify-between">
                 <div class="flex gap-15">
                     <img src="../../images/avatar4.png">
-                    <div class="text-white">
+                    <div class="text-black">
                         <div class="font-semibold text-base">Olivia Cooke</div>
                         <p class="font-medium text-p line-clamp-1">Хорошо, я подумаю</p>
                     </div>
@@ -84,7 +88,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
             <div class="flex items-center justify-between">
                 <div class="flex gap-15">
                     <img src="../../images/avatar5.png">
-                    <div class="text-white">
+                    <div class="text-black">
                         <div class="font-semibold text-base">Vadim Petrov</div>
                         <p class="font-medium text-p line-clamp-1">Какие функции находятся в стадии разработки?</p>
                     </div>
@@ -96,7 +100,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
             <div class="flex items-center justify-between">
                 <div class="flex gap-15">
                     <img src="../../images/avatar6.png">
-                    <div class="text-white">
+                    <div class="text-black">
                         <div class="font-semibold text-base">Emma Roberts</div>
                         <p class="font-medium text-p line-clamp-1">Мы можем это обсудить</p>
                     </div>
@@ -111,7 +115,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
             <div class="flex items-center justify-between">
                 <div class="flex gap-15">
                     <img src="../../images/avatar7.png">
-                    <div class="text-white">
+                    <div class="text-black">
                         <div class="font-semibold text-base">Evgeny Zhurenkov</div>
                         <p class="font-medium text-p line-clamp-1">WMS передает картографическую информацию в виде готовых изображений</p>
                     </div>
@@ -126,7 +130,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
             <div class="flex items-center justify-between">
                 <div class="flex gap-15">
                     <img src="../../images/avatar8.png">
-                    <div class="text-white">
+                    <div class="text-black">
                         <div class="font-semibold text-base">Dani Ludwig</div>
                         <p class="font-medium text-p line-clamp-1">Не могли бы вы взглянуть на эти файлы</p>
                     </div>
@@ -141,7 +145,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
             <div class="flex items-center justify-between">
                 <div class="flex gap-15">
                     <img src="../../images/avatar9.png">
-                    <div class="text-white">
+                    <div class="text-black">
                         <div class="font-semibold text-base">Isis Branco</div>
                         <p class="font-medium text-p line-clamp-1">Мне нравится Laravel</p>
                     </div>
@@ -153,7 +157,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
             <div class="flex items-center justify-between">
                 <div class="flex gap-15">
                     <img src="../../images/avatar10.png">
-                    <div class="text-white">
+                    <div class="text-black">
                         <div class="font-semibold text-base">Mikhail Prokhorov</div>
                         <p class="font-medium text-p line-clamp-1">Жду результата</p>
                     </div>
@@ -165,7 +169,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
             <div class="flex items-center justify-between">
                 <div class="flex gap-15">
                     <img src="../../images/avatar11.png">
-                    <div class="text-white">
+                    <div class="text-black">
                         <div class="font-semibold text-base">Rick</div>
                         <p class="font-medium text-p line-clamp-1">Давай встретимся после работы</p>
                     </div>

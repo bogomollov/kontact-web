@@ -11,17 +11,9 @@ export default {
     ],
     theme: {
         fontFamily: {
-            sans: ['Inter', ...defaultTheme.fontFamily.sans],
+            sans: ['Golos Text', 'sans-serif'],
         },
         extend: {
-            colors: {
-                'white': '#E0E0E0',
-                'black': '#131313',
-                'dark-gray': '#1A1A1A',
-                'gray': '#555555',
-                'blue': '#6B8AFD',
-                'blue2': '#5870CB',
-            },
             fontSize: {
                 'h1': '38px',
                 'base': '18px',
@@ -45,6 +37,7 @@ export default {
             },
             borderRadius: {
                 '10': '10px',
+                '5': '5px',
             },
         },
     },

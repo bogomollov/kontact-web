@@ -12,11 +12,12 @@ class Account extends Model
 
     protected $fillable = [
         'user_id',
-        'display_name',
+        'username',
         'login',
         'password',
         'email',
         'email_verified_at',
+        'phone',
         'is_online',
         'remember_token',
     ];
@@ -25,4 +26,12 @@ class Account extends Model
         'password',
         'remember_token',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
 }
