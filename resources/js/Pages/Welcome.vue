@@ -14,15 +14,10 @@ defineProps({
 
 <template>
     <GuestLayout>
-        <div class="title text-h1 text-white mb-30">Оставайтесь на связи с любого устройства</div>
-        <div class="flex items-end md:flex-wrap md:justify-center md:shrink-0">
-            <img class="border-2 border-dark-gray rounded-10 py-10 pl-10" src="../../images/pc-mockup.png">
-            <img src="../../images/iphone-mockup.png">
+        <div class="flex flex-col items-center mb-[40px] gap-[20px]">
+            <h1 class="text-neutral-950 font-medium">Современный корпоративный мессенджер</h1>
+            <h4 class="text-neutral-500">Быстрый. Надежный. Простой.</h4>
         </div>
+        <div class="bg-neutral-200 w-full h-[650px]"></div>
     </GuestLayout>
 </template>
-<style lang="css" scoped>
-.title {
-    font-weight: 500;
-}
-</style>

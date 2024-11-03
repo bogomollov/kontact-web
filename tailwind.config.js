@@ -14,12 +14,7 @@ export default {
             sans: ['Golos Text', 'sans-serif'],
         },
         extend: {
-            fontSize: {
-                'h1': '38px',
-                'base': '18px',
-                'p': '16px',
-                'small': '14px',
-            },
+            borderColor: '#e5e5e5',
             spacing: {
                 '8': '8px',
                 '10': '10px',

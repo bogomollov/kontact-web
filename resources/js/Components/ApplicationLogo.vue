@@ -2,10 +2,5 @@
 import { Link } from '@inertiajs/vue3';
 </script>
 <template>
-    <Link href="/" class="logo text-white">kontact</Link>
+    <Link href="/"><h3 class="text-neutral-950">контакт</h3></Link>
 </template>
-<style lang="css" scoped>
-.logo {
-    font-weight: 500;
-}
-</style>
