@@ -7,7 +7,7 @@ import { Head } from '@inertiajs/vue3';
 <template>
     <Head title="Web" />
     <div class="flex h-screen">
-        <LeftSidebarMenu />
+        <LeftSidebarMenu class="border-r border-neutral-200"/>
         <ChatBoxLayout />
     </div>
 </template>

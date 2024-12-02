@@ -4,13 +4,13 @@ import AuthenticatedLayout from './AuthenticatedLayout.vue';
 </script>
 
 <template>
-    <div class="flex flex-col overflow-y-scroll min-w-[400px] max-w-[550px] resize-x h-screen px-15 py-20 gap-30">
+    <div class="flex flex-col overflow-y-scroll min-w-[400px] max-w-[550px] resize-x h-screen px-20 py-20 gap-30">
         <AuthenticatedLayout/>
         <div class="flex">
             <label class="flex-1">
             <TextInput
                 type="text"
-                class="block bg-transparent text-neutral-500 pl-[58px] w-full text-base"
+                class="block px-[20px] py-[12px] bg-transparent text-neutral-500 pl-[58px] w-full text-base"
                 placeholder="Поиск"
             />
             </label>
@@ -83,7 +83,7 @@ label::before {
     left: 20px;
     top: 0;
     bottom: 0;
-    width: 24px;
+    width: 18px;
     background: url("../../images/search.svg") center / contain no-repeat;
 }
 </style>

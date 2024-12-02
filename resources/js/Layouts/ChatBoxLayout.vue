@@ -5,27 +5,59 @@ import TextInput from '@/Components/TextInput.vue';
     <div class="flex flex-col w-full h-screen mr-15">
         <div class="bg-dark-gray w-full h-[95px] px-30 py-[17.5px] mb-30 rounded-b-10">
             <div class="flex gap-15 items-center">
-                <img src="../../images/0.png">
-                <div class="text-white">
-                    <div class="font-semibold text-base">Evgeny Zhurenkov</div>
-                    <p class="font-medium text-p text-gray">был(а) в 21:00</p>
+                <img src="../../images/avatar.png">
+                <div>
+                    <h4 class="text-neutral-950">Тимоти Шаламе</h4>
+                    <p class="text-base text-neutral-500">был(а) в 21:00</p>
                 </div>
             </div>
         </div>
-        <div class="flex flex-col max-w-full pr-15 overflow-y-scroll h-auto">
-            <p class="message message-in text-white p-10 rounded-t-10 rounded-br-10">message-in</p>
-            <p class="message message-out text-white p-10 rounded-t-10 rounded-bl-10">message-out</p>
-            <p class="message message-out text-white p-10 rounded-t-10 rounded-bl-10">message-out message-out message-out message-out message-out message-out message-out message-out message-out message-out message-out message-out</p>
-            <p class="message message-in text-white p-10 rounded-t-10 rounded-br-10">message-in message-in message-in message-in message-in message-in</p>
-            <p class="message message-in text-white p-10 rounded-t-10 rounded-br-10">message-in</p>
-            <p class="message message-in text-white p-10 rounded-t-10 rounded-br-10">message-in message-in message-in</p>
-            <p class="message message-in text-white p-10 rounded-t-10 rounded-br-10">message-in</p>
-            <p class="message message-in text-white p-10 rounded-t-10 rounded-br-10">message-in message-in</p>
-            <p class="message message-out text-white p-10 rounded-t-10 rounded-bl-10">message-out message-out message-out message-out message-out message-out message-out message-out</p>
-            <p class="message message-out text-white p-10 rounded-t-10 rounded-bl-10">message-out message-out message-out message-out</p>
-            <p class="message message-out text-white p-10 rounded-t-10 rounded-bl-10">message-out message-out</p>
-            <p class="message message-out text-white p-10 rounded-t-10 rounded-bl-10">message-out message-out message-out</p>
-            <p class="message message-out text-white p-10 rounded-t-10 rounded-bl-10">message-out</p>
+        <div class="flex flex-col pr-15 overflow-y-scroll h-auto">
+            <div class="flex items-center gap-[10px] message message-in">
+                message-in
+                <div class="flex gap-[8px] items-center justify-center">
+                    <small>10:06</small>
+                    <svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.86217 5.25619L8.72398 9.118L17 0.842773M1 5.29543L4.86182 9.15724M13.137 0.882012L8.99938 5.01967" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="flex items-center gap-[10px] message message-in">
+                message-in
+                <div class="flex gap-[8px] items-center justify-center">
+                    <small>18:56</small>
+                    <svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.86217 5.25619L8.72398 9.118L17 0.842773M1 5.29543L4.86182 9.15724M13.137 0.882012L8.99938 5.01967" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="message message-out">
+                message-out
+                <div class="flex gap-[8px] items-center justify-center">
+                    <small>09:50</small>
+                    <svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.86217 5.25619L8.72398 9.118L17 0.842773M1 5.29543L4.86182 9.15724M13.137 0.882012L8.99938 5.01967" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="flex items-center gap-[10px] message message-out p-10 rounded-t-10 rounded-br-10">
+                message-out message-out message-out message-out message-out
+                <div class="flex gap-[8px] items-center justify-center">
+                    <small>09:50</small>
+                    <svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.86217 5.25619L8.72398 9.118L17 0.842773M1 5.29543L4.86182 9.15724M13.137 0.882012L8.99938 5.01967" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="flex items-center gap-[10px] message message-in">
+                message-in
+                <div class="flex gap-[8px] items-center justify-center">
+                    <small>18:56</small>
+                    <svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.86217 5.25619L8.72398 9.118L17 0.842773M1 5.29543L4.86182 9.15724M13.137 0.882012L8.99938 5.01967" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
         </div>
         <div class="flex items-center justify-between gap-15 mt-30 mb-30">
             <div class="p-[20px] bg-dark-gray rounded-10 justify-center">
@@ -38,8 +70,8 @@ import TextInput from '@/Components/TextInput.vue';
             </div>
             <TextInput
                 type="text"
-                class="bg-dark-gray text-white px-30 py-20 block w-full h-[58px] text-base"
-                placeholder="Сообщение"
+                class="bg-dark-gray text-neutral-950 px-30 py-20 block w-full h-[58px] text-base"
+                placeholder="Поиск по сообщениям"
             />
             <div class="p-[20px] bg-dark-gray rounded-10 items-center justify-center">
                 <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,17 +88,24 @@ import TextInput from '@/Components/TextInput.vue';
 </template>
 <style lang="css" scoped>
 .message {
+    @apply flex items-center gap-[10px] text-neutral-900 p-10 rounded-[10px];
     width: max-content;
     overflow-wrap: break-word;
     margin-bottom: 10px;
     max-width: 50%;
 }
 .message-in {
-    background-color: #1A1A1A;
+    @apply bg-neutral-200;
     margin-right: auto;
 }
+.message-in small {
+    @apply text-neutral-500;
+}
 .message-out {
-    background-color: #5870CB;
+    @apply bg-blue-200;
     margin-left: auto;
+}
+.message-out small {
+    @apply text-blue-500;
 }
 </style>

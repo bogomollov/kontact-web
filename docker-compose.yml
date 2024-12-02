@@ -1,12 +1,12 @@
 services:
-    laravel:
+    kontact:
         build:
             context: './vendor/laravel/sail/runtimes/8.4'
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
         image: 'sail-8.4/app'
-        container_name: laravel
+        container_name: kontact
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
@@ -27,6 +27,7 @@ services:
             - redis
     pgsql:
         image: 'postgres:17'
+        container_name: pgsql
         ports:
             - '${FORWARD_DB_PORT:-5432}:5432'
         environment:
@@ -52,6 +53,7 @@ services:
             timeout: 5s
     redis:
         image: 'redis:7.4.1-alpine'
+        container_name: redis
         ports:
             - '${FORWARD_REDIS_PORT:-6379}:6379'
         volumes:
