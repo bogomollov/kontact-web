@@ -1,9 +1,10 @@
 <script setup>
+import TextAreaInput from '@/Components/TextAreaInput.vue';
 import TextInput from '@/Components/TextInput.vue';
 </script>
 <template>
-    <div class="flex flex-col w-full h-screen mr-15">
-        <div class="bg-dark-gray w-full h-[95px] px-30 py-[17.5px] mb-30 rounded-b-10">
+    <div class="flex flex-col w-full h-screen">
+        <div class="flex w-full items-center justify-between h-[95px] py-[17.5px] px-30 mb-30 border-b border-neutral-200">
             <div class="flex gap-15 items-center">
                 <img src="../../images/avatar.png">
                 <div>
@@ -11,28 +12,43 @@ import TextInput from '@/Components/TextInput.vue';
                     <p class="text-base text-neutral-500">был(а) в 21:00</p>
                 </div>
             </div>
+            <div class="flex px-20 w-1/3">
+                <label class="flex-1">
+                <TextInput
+                    type="text"
+                    class="block px-[12px] py-[12px] border-neutral-300 bg-transparent pl-[58px] w-full text-base"
+                    placeholder="Поиск по сообщениям"
+                />
+                </label>
+            </div>
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 15V11M11 7H11.01M21 11C21 16.5228 16.5228 21 11 21C5.47715 21 1 16.5228 1 11C1 5.47715 5.47715 1 11 1C16.5228 1 21 5.47715 21 11Z" stroke="#737373" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </div>
-        <div class="flex flex-col pr-15 overflow-y-scroll h-auto">
-            <div class="flex items-center gap-[10px] message message-in">
-                message-in
+        <div class="flex flex-col pr-15 pl-30 h-[100%] overflow-y-scroll chat">
+            <div class="message message-in">
+                <a>message-in</a>
                 <div class="flex gap-[8px] items-center justify-center">
                     <small>10:06</small>
-                    <svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.86217 5.25619L8.72398 9.118L17 0.842773M1 5.29543L4.86182 9.15724M13.137 0.882012L8.99938 5.01967" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
                 </div>
             </div>
-            <div class="flex items-center gap-[10px] message message-in">
-                message-in
+            <div class="message message-in">
+                <a>message-in</a>
                 <div class="flex gap-[8px] items-center justify-center">
                     <small>18:56</small>
+                </div>
+            </div>
+            <div class="message message-out">
+                <a>message-out</a>
+                <div class="flex gap-[8px] items-center justify-center">
+                    <small>09:50</small>
                     <svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M4.86217 5.25619L8.72398 9.118L17 0.842773M1 5.29543L4.86182 9.15724M13.137 0.882012L8.99938 5.01967" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
             </div>
             <div class="message message-out">
-                message-out
+                <a>message-out message-out message-out message-out message-out</a>
                 <div class="flex gap-[8px] items-center justify-center">
                     <small>09:50</small>
                     <svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,55 +56,41 @@ import TextInput from '@/Components/TextInput.vue';
                     </svg>
                 </div>
             </div>
-            <div class="flex items-center gap-[10px] message message-out p-10 rounded-t-10 rounded-br-10">
-                message-out message-out message-out message-out message-out
-                <div class="flex gap-[8px] items-center justify-center">
-                    <small>09:50</small>
-                    <svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.86217 5.25619L8.72398 9.118L17 0.842773M1 5.29543L4.86182 9.15724M13.137 0.882012L8.99938 5.01967" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-            </div>
-            <div class="flex items-center gap-[10px] message message-in">
-                message-in
+            <div class="message message-in">
+                <a>message-in</a>
                 <div class="flex gap-[8px] items-center justify-center">
                     <small>18:56</small>
-                    <svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.86217 5.25619L8.72398 9.118L17 0.842773M1 5.29543L4.86182 9.15724M13.137 0.882012L8.99938 5.01967" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
                 </div>
             </div>
         </div>
-        <div class="flex items-center justify-between gap-15 mt-30 mb-30">
-            <div class="p-[20px] bg-dark-gray rounded-10 justify-center">
-                <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10.5 20.5C15.7467 20.5 20 16.2467 20 11C20 5.75329 15.7467 1.5 10.5 1.5C5.25329 1.5 1 5.75329 1 11C1 16.2467 5.25329 20.5 10.5 20.5Z" stroke="#E0E0E0" stroke-width="2"/>
-                <path d="M7.6499 14.7999C8.45776 15.3987 9.44027 15.7499 10.4999 15.7499C11.5595 15.7499 12.542 15.3987 13.3499 14.7999" stroke="#E0E0E0" stroke-width="2" stroke-linecap="round"/>
-                <path d="M14.2999 9.57502C14.2999 10.362 13.8746 11 13.3499 11C12.8252 11 12.3999 10.362 12.3999 9.57502C12.3999 8.78802 12.8252 8.15002 13.3499 8.15002C13.8746 8.15002 14.2999 8.78802 14.2999 9.57502Z" fill="#E0E0E0"/>
-                <path d="M7.64971 11C8.17438 11 8.59971 10.362 8.59971 9.57502C8.59971 8.78802 8.17438 8.15002 7.64971 8.15002C7.12504 8.15002 6.69971 8.78802 6.69971 9.57502C6.69971 10.362 7.12504 11 7.64971 11Z" fill="#E0E0E0"/>
-                </svg>
-            </div>
-            <TextInput
+        <div class="flex flex-col justify-between mx-[30px] p-[16px] rounded-10 gap-[15px] mb-30 border border-neutral-300">
+            <TextAreaInput
                 type="text"
-                class="bg-dark-gray text-neutral-950 px-30 py-20 block w-full h-[58px] text-base"
-                placeholder="Поиск по сообщениям"
+                class="overflow-y-scroll chat"
+                placeholder="Сообщение"
             />
-            <div class="p-[20px] bg-dark-gray rounded-10 items-center justify-center">
-                <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5 15H11M5 12H11M9.00038 1.00087C8.90484 1 8.79738 1 8.67471 1H4.2002C3.08009 1 2.51962 1 2.0918 1.21799C1.71547 1.40973 1.40973 1.71547 1.21799 2.0918C1 2.51962 1 3.08009 1 4.2002V15.8002C1 16.9203 1 17.4801 1.21799 17.9079C1.40973 18.2842 1.71547 18.5905 2.0918 18.7822C2.51921 19 3.079 19 4.19694 19L11.8031 19C12.921 19 13.48 19 13.9074 18.7822C14.2837 18.5905 14.5905 18.2842 14.7822 17.9079C15 17.4805 15 16.9215 15 15.8036V7.32568C15 7.20302 14.9999 7.09553 14.999 7M9.00038 1.00087C9.28583 1.00348 9.46572 1.01407 9.63818 1.05547C9.84225 1.10446 10.0379 1.18526 10.2168 1.29492C10.4186 1.41857 10.5918 1.59181 10.9375 1.9375L14.063 5.06298C14.4089 5.40889 14.5809 5.58136 14.7046 5.78319C14.8142 5.96214 14.8953 6.15726 14.9443 6.36133C14.9857 6.53379 14.9964 6.71454 14.999 7M9.00038 1.00087L9 3.80021C9 4.92031 9 5.48015 9.21799 5.90797C9.40973 6.2843 9.71547 6.59048 10.0918 6.78223C10.5192 7 11.079 7 12.1969 7H14.999" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            <div class="p-[20px] bg-blue inline-flex rounded-full items-center justify-center">
-                <svg width="23" height="23" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4.87861 12.2835L13.5089 12.2834M20.5565 14.0641L5.0762 22.2596C3.6889 22.9941 2.99486 23.3615 2.53742 23.2558C2.14064 23.1642 1.81278 22.8874 1.65718 22.5111C1.47776 22.0771 1.72581 21.3313 2.22236 19.8416L4.52945 12.9205C4.60824 12.6841 4.64728 12.5662 4.66293 12.4453C4.67681 12.338 4.6775 12.2295 4.66362 12.1222C4.64832 12.004 4.60974 11.8883 4.53445 11.6625L2.22214 4.72539C1.7256 3.23575 1.47751 2.49065 1.65694 2.05673C1.81255 1.6804 2.14035 1.40294 2.53713 1.31132C2.99465 1.20567 3.68888 1.57273 5.07662 2.30741L20.5568 10.5027C21.6478 11.0803 22.1933 11.3694 22.3717 11.7546C22.527 12.0902 22.5272 12.477 22.3719 12.8126C22.1936 13.1976 21.6481 13.4864 20.5582 14.0634L20.5565 14.0641Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <div class="flex w-full justify-between items-center">
+                <div class="flex gap-[20px] items-center">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.4 11.8C6.4 11.8 7.75 13.6 10 13.6C12.25 13.6 13.6 11.8 13.6 11.8M12.7 7.3H12.709M7.3 7.3H7.309M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10ZM13.15 7.3C13.15 7.54853 12.9485 7.75 12.7 7.75C12.4515 7.75 12.25 7.54853 12.25 7.3C12.25 7.05147 12.4515 6.85 12.7 6.85C12.9485 6.85 13.15 7.05147 13.15 7.3ZM7.75 7.3C7.75 7.54853 7.54853 7.75 7.3 7.75C7.05147 7.75 6.85 7.54853 6.85 7.3C6.85 7.05147 7.05147 6.85 7.3 6.85C7.54853 6.85 7.75 7.05147 7.75 7.3Z" stroke="#737373" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.2 19H4.93137C4.32555 19 4.02265 19 3.88238 18.8802C3.76068 18.7763 3.69609 18.6203 3.70865 18.4608C3.72312 18.2769 3.93731 18.0627 4.36569 17.6343L12.8686 9.13137C13.2646 8.73536 13.4627 8.53735 13.691 8.46316C13.8918 8.3979 14.1082 8.3979 14.309 8.46316C14.5373 8.53735 14.7354 8.73535 15.1314 9.13137L19 13V14.2M14.2 19C15.8802 19 16.7202 19 17.362 18.673C17.9265 18.3854 18.3854 17.9265 18.673 17.362C19 16.7202 19 15.8802 19 14.2M14.2 19H5.8C4.11984 19 3.27976 19 2.63803 18.673C2.07354 18.3854 1.6146 17.9265 1.32698 17.362C1 16.7202 1 15.8802 1 14.2V5.8C1 4.11984 1 3.27976 1.32698 2.63803C1.6146 2.07354 2.07354 1.6146 2.63803 1.32698C3.27976 1 4.11984 1 5.8 1H14.2C15.8802 1 16.7202 1 17.362 1.32698C17.9265 1.6146 18.3854 2.07354 18.673 2.63803C19 3.27976 19 4.11984 19 5.8V14.2M8.5 6.5C8.5 7.60457 7.60457 8.5 6.5 8.5C5.39543 8.5 4.5 7.60457 4.5 6.5C4.5 5.39543 5.39543 4.5 6.5 4.5C7.60457 4.5 8.5 5.39543 8.5 6.5Z" stroke="#737373" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 8.60776L8.97628 16.6315C7.1516 18.4562 4.1932 18.4562 2.36851 16.6315C0.543829 14.8068 0.543829 11.8484 2.36851 10.0237L10.3922 1.99999C11.6087 0.783532 13.581 0.783532 14.7974 1.99999C16.0139 3.21645 16.0139 5.18871 14.7974 6.40517L7.08835 14.1142C6.48012 14.7225 5.49399 14.7225 4.88576 14.1142C4.27753 13.506 4.27753 12.5199 4.88576 11.9116L11.6509 5.14654" stroke="#737373" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9.21844 9.43253H3.71844M3.63379 9.72403L1.29887 16.6987C1.11543 17.2467 1.02372 17.5206 1.08954 17.6894C1.1467 17.8359 1.26946 17.947 1.42094 17.9892C1.59538 18.0379 1.85884 17.9193 2.38578 17.6822L19.0972 10.1621C19.6116 9.93062 19.8687 9.8149 19.9482 9.65414C20.0173 9.51447 20.0173 9.35059 19.9482 9.21093C19.8687 9.05016 19.6116 8.93444 19.0972 8.703L2.37995 1.18025C1.85461 0.94385 1.59194 0.825648 1.41767 0.874136C1.26633 0.916246 1.14358 1.02703 1.08623 1.17327C1.02018 1.34167 1.11092 1.61505 1.29239 2.1618L3.63444 9.21806C3.66561 9.31197 3.68119 9.35892 3.68734 9.40694C3.6928 9.44955 3.69275 9.49269 3.68718 9.53529C3.6809 9.58329 3.6652 9.63021 3.63379 9.72403Z" stroke="#737373" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
         </div>
     </div>
 </template>
-<style lang="css" scoped>
+<style scoped>
 .message {
-    @apply flex items-center gap-[10px] text-neutral-900 p-10 rounded-[10px];
+    @apply flex items-center justify-center gap-[12px] text-neutral-900 px-10 py-8 rounded-[10px];
     width: max-content;
     overflow-wrap: break-word;
     margin-bottom: 10px;
@@ -107,5 +109,18 @@ import TextInput from '@/Components/TextInput.vue';
 }
 .message-out small {
     @apply text-blue-500;
+}
+label {
+    position: relative;
+}
+label::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    height: 50px;
+    background: url("../../images/search.svg") center / contain no-repeat;
 }
 </style>
