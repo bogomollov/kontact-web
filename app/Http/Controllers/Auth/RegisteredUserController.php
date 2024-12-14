@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -31,15 +32,33 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'firstName' => 'required|string|max:255',
+            'lastName' => 'required|string',
+            'middleName' => 'required|string',
+            'department_id' => 'required|integer',
+            'role_id' => 'required|integer',
+
+            'username' => 'required|string',
+            'password' => ['required', Rules\Password::defaults()],
+            'email' => 'required|string|lowercase|email|max:255|unique:'.Account::class,
+            'phone' => 'required|string|max:11',            
         ]);
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
+            'firstName' => $request->firstName,
+            'lastName' => $request->lastName,
+            'middleName' => $request->middleName,
+            'department_id' => $request->department_id,
+            'role_id' => $request->role_id,
+        ]);
+
+        Account::create([
+            'user_id' => $user->id,
+            'username' => $request->username,
             'password' => Hash::make($request->password),
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'is_online' => true,
         ]);
 
         event(new Registered($user));

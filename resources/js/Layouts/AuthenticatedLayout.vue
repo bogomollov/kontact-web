@@ -6,10 +6,10 @@ import { Link } from '@inertiajs/vue3';
     <div class="flex items-center justify-between">
         <div class="flex items-center justify-center gap-15">
             <div class="rounded-full bg-black flex items-end justify-end w-[60px] h-[60px]">
-                <div class="rounded-full bg-blue-500 mr-1 mb-1 border-neutral-500 border w-[12px] h-[12px]"></div>
+                <div class="rounded-full bg-blue-500 mr-1 mb-1 w-[12px] h-[12px]"></div>
             </div>
             <div class="flex flex-col">
-                <p class="text-neutral-950 text-base">{{ $page.props.auth.user.id }}</p>
+                <h5 class="text-neutral-950">{{ $page.props.auth.user.id }}</h5>
                 <p class="text-blue-500 text-base cursor-pointer" ref="username" @click="copy()">@{{ $page.props.auth.user.username }}</p>
             </div>
         </div>

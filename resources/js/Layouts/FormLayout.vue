@@ -1,9 +1,7 @@
 <template>
-    <div class="min-h-screen flex justify-center items-center pt-6 sm:pt-0">
-        <div
-            class="w-full max-w-md overflow-hidden"
-        >
-            <slot />
-        </div>
+  <div class="min-h-screen flex justify-center items-center">
+    <div class="w-full max-w-max overflow-hidden">
+      <slot />
     </div>
+  </div>
 </template>
