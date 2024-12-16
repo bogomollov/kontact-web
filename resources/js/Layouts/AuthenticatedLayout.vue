@@ -1,5 +1,6 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
+const props = defineProps(['person']);
 </script>
 
 <template>
@@ -9,7 +10,7 @@ import { Link } from '@inertiajs/vue3';
                 <div class="rounded-full bg-blue-500 mr-1 mb-1 w-[12px] h-[12px]"></div>
             </div>
             <div class="flex flex-col">
-                <h5 class="text-neutral-950">{{ $page.props.auth.user.id }}</h5>
+                <h5 class="text-neutral-950">{{ $page.props.person.firstName }} {{ $page.props.person.lastName }}</h5>
                 <p class="text-blue-500 text-base cursor-pointer" ref="username" @click="copy()">@{{ $page.props.auth.user.username }}</p>
             </div>
         </div>

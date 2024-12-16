@@ -52,7 +52,7 @@ class RegisteredUserController extends Controller
             'role_id' => $request->role_id,
         ]);
 
-        Account::create([
+        $account = Account::create([
             'user_id' => $user->id,
             'username' => $request->username,
             'password' => Hash::make($request->password),
@@ -61,9 +61,9 @@ class RegisteredUserController extends Controller
             'is_online' => true,
         ]);
 
-        event(new Registered($user));
+        event(new Registered($account));
 
-        Auth::login($user);
+        Auth::login($account);
 
         return redirect(route('dashboard', absolute: false));
     }
