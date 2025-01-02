@@ -23,7 +23,6 @@ class Account extends Authenticatable
         'password',
         'email',
         'phone',
-        'is_online',
         'remember_token',
     ];
 

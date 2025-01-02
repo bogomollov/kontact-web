@@ -20,7 +20,6 @@ class AccountFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'phone' => fake()->phoneNumber(),
-            'is_online' => fake()->boolean(),
             'remember_token' => Str::random(10),
         ];
     }
