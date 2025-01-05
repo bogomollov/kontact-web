@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -10,4 +11,5 @@ use Illuminate\Support\Facades\Route;
 // })->middleware('auth:sanctum');\
 
 Route::apiResource('departments', DepartmentController::class);
+Route::apiResource('roles', RoleController::class);
 Route::apiResource('users', UserController::class);

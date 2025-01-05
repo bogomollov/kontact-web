@@ -10,7 +10,7 @@ const model = defineModel({
 
 <template>
   <input
-    class="focus:ring-0 text-neutral-950 placeholder:text-neutral-500 placeholder:font-base rounded-10"
+    class="focus:ring-0 w-full text-neutral-950 placeholder:text-neutral-500 placeholder:font-base rounded-10"
     v-model="model"
     :placeholder="placeholder"
   />

@@ -38,7 +38,7 @@ const submit = () => {
       <h4 class="font-medium mb-[20px]">Личные данные</h4>
       <div class="flex flex-col gap-[15px] mb-[30px]">
         <div class="flex gap-[15px]">
-          <div>
+          <div class="w-full">
             <InputLabel for="firstName" value="Имя" />
 
             <TextInput
@@ -55,7 +55,7 @@ const submit = () => {
             <InputError class="mt-2" :message="form.errors.firstName" />
           </div>
 
-          <div>
+          <div class="w-full">
             <InputLabel for="lastName" value="Фамилия" />
 
             <TextInput
@@ -71,7 +71,7 @@ const submit = () => {
 
             <InputError class="mt-2" :message="form.errors.lastName" />
           </div>
-          <div>
+          <div class="w-full">
             <InputLabel for="middleName" value="Отчество" />
 
             <TextInput
@@ -92,30 +92,34 @@ const submit = () => {
           <div class="w-full">
             <InputLabel for="department_id" value="Сфера деятельности" />
 
-            <TextInput
+            <select v-model="form.department_id" v-for="data in departmentList"
               id="department_id"
-              type="text"
-              class="bg-dark-gray mt-1 block w-full px-[15px] py-[10px]"
-              v-model="form.department_id"
+              class="focus:ring-0 rounded-10 bg-dark-gray mt-1 block w-full px-[15px] py-[10px]"
               required
               autocomplete="department_id"
-              placeholder="Выберите сферу деятельности"
-            />
+            >
+              <option value="" disabled selected>Выберите сферу деятельности</option>
+              <option :value="department.id" v-for="(department, key) in data">
+                {{ department.name }}
+              </option>
+            </select>
 
             <InputError class="mt-2" :message="form.errors.department_id" />
           </div>
           <div class="w-full">
             <InputLabel for="role_id" value="Должность" />
 
-            <TextInput
+            <select v-model="form.role_id" v-for="data in roleList"
               id="role_id"
-              type="text"
-              class="bg-dark-gray mt-1 block w-full px-[15px] py-[10px]"
-              v-model="form.role_id"
+              class="focus:ring-0 rounded-10 bg-dark-gray mt-1 block w-full px-[15px] py-[10px]"
               required
               autocomplete="role_id"
-              placeholder="Выберите должность"
-            />
+            >
+              <option value="" disabled selected>Выберите должность</option>
+              <option :value="role.id" v-for="(role, key) in data">
+                {{ role.name }}
+              </option>
+            </select>
 
             <InputError class="mt-2" :message="form.errors.role_id" />
           </div>
@@ -202,3 +206,40 @@ const submit = () => {
     </form>
   </FormLayout>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      departmentList: '',
+      roleList: '',
+    };
+  },
+  methods: {
+    async getDepartmentList() {
+      await axios.get('/api/departments').then((res) => {
+        this.departmentList = res.data;
+      });
+    },
+    async getRoleList() {
+      await axios.get('/api/roles').then((res) => {
+        this.roleList = res.data;
+      });
+    },
+  },
+  mounted() {
+    this.getDepartmentList();
+    this.getRoleList();
+  }
+}
+</script>
+<style scoped>
+select:required:invalid {
+  color: gray;
+}
+option[value=""][disabled] {
+  display: none;
+}
+option {
+  @apply text-neutral-900;
+}
+</style>
