@@ -94,7 +94,7 @@ const submit = () => {
 
             <select v-model="form.department_id" v-for="data in departmentList"
               id="department_id"
-              class="focus:ring-0 rounded-10 bg-dark-gray mt-1 block w-full px-[15px] py-[10px]"
+              class="truncate focus:ring-0 rounded-10 bg-dark-gray mt-1 block w-full pr-[30px] pl-[15px] py-[10px]"
               required
               autocomplete="department_id"
             >
@@ -111,7 +111,7 @@ const submit = () => {
 
             <select v-model="form.role_id" v-for="data in roleList"
               id="role_id"
-              class="focus:ring-0 rounded-10 bg-dark-gray mt-1 block w-full px-[15px] py-[10px]"
+              class="truncate focus:ring-0 rounded-10 bg-dark-gray mt-1 block w-full pr-[30px] pl-[15px] py-[10px]"
               required
               autocomplete="role_id"
             >

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Cache as Redis;
@@ -23,6 +24,7 @@ class UserResource extends JsonResource
             'department_id' => $this->department_id,
             'role_id' => $this->role_id,
             'last_activity' => Redis::get($this->id . '_online'),
+            'username' => Account::find($this->id)->username,
         ];
     }
 }

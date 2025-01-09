@@ -15,98 +15,138 @@ defineProps({
 });
 
 const user = usePage().props.auth.user;
+const person = usePage().props.person;
 
-const form = useForm({
-    name: user.name,
+const formPerson = useForm({
+    photo: person.photo,
+    firstName: person.firstName,
+    lastName: person.lastName,
+    middleName: person.middleName,
+    department_id: person.department_id,
+    role_id: person.role_id,
+});
+
+const formAccount = useForm({
+    username: user.username,
     email: user.email,
+    phone: user.phone,
 });
 </script>
 
 <template>
     <section>
-        <header>
-            <h2 class="text-lg font-medium text-gray-900">
-                Profile Information
-            </h2>
-
-            <p class="mt-1 text-sm text-gray-600">
-                Update your account's profile information and email address.
-            </p>
-        </header>
-
-        <form
-            @submit.prevent="form.patch(route('profile.update'))"
-            class="mt-6 space-y-6"
-        >
-            <div>
-                <InputLabel for="name" value="Name" />
-
-                <TextInput
-                    id="name"
+        <header class="flex flex-col gap-[20px] p-[30px] bg-white border border-neutral-200 rounded-lg">
+            <div class="flex flex-col gap-[10px]">
+                <h4 class="font-medium">Информация профиля</h4>
+                <p class="text-gray-500">Обновите сведения своего профиля</p>
+            </div>
+            <form
+            @submit.prevent="form.patch(route('profile.update'))">
+            <div class="flex flex-col gap-[15px]">
+                <div class="flex flex-col gap-[10px]">
+                    <InputLabel value="Фотография" />
+                    <img :src="`/storage/${$page.props.auth.user.id}.png`" class="w-[60px] h-[60px]">
+                </div>
+                <div class="flex flex-col gap-[10px]">
+                    <InputLabel for="firstName" value="Имя" />
+                    <TextInput
+                    id="firstName"
                     type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.name"
+                    class="block w-full"
+                    v-model="formPerson.firstName"
                     required
-                    autofocus
-                    autocomplete="name"
-                />
-
-                <InputError class="mt-2" :message="form.errors.name" />
-            </div>
-
-            <div>
-                <InputLabel for="email" value="Email" />
-
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autocomplete="username"
-                />
-
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
-
-            <div v-if="mustVerifyEmail && user.email_verified_at === null">
-                <p class="mt-2 text-sm text-gray-800">
-                    Your email address is unverified.
-                    <Link
-                        :href="route('verification.send')"
-                        method="post"
-                        as="button"
-                        class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    autocomplete="firstName"
+                    />
+                </div>
+                <div class="flex flex-col gap-[10px]">
+                    <InputLabel for="lastName" value="Фамилия" />
+                    <TextInput
+                        id="lastName"
+                        type="text"
+                        class="block w-full"
+                        v-model="formPerson.lastName"
+                        required
+                        autocomplete="lastName"
+                    />
+                </div>
+                <div class="flex flex-col gap-[10px]">
+                    <InputLabel for="middleName" value="Отчество" />
+                    <TextInput
+                        id="middleName"
+                        type="text"
+                        class="block w-full"
+                        v-model="formPerson.middleName"
+                        required
+                        autocomplete="middleName"
+                    />
+                </div>
+                <div class="flex flex-col gap-[10px]">
+                    <InputLabel for="department_id" value="Сфера деятельности" />
+                    <select v-model="formPerson.department_id" v-for="data in departmentList"
+                        id="department_id"
+                        class="truncate focus:ring-0 rounded-10 bg-dark-gray mt-1 block w-full pr-[30px] pl-[15px] py-[10px]"
+                        required
+                        autocomplete="department_id"
                     >
-                        Click here to re-send the verification email.
-                    </Link>
-                </p>
-
-                <div
-                    v-show="status === 'verification-link-sent'"
-                    class="mt-2 text-sm font-medium text-green-600"
-                >
-                    A new verification link has been sent to your email address.
+                    <option value="" disabled selected>Выберите сферу деятельности</option>
+                    <option :value="department.id" v-for="(department, key) in data">
+                        {{ department.name }}
+                    </option>
+                    </select>
+                </div>
+                <div class="flex flex-col gap-[10px]">
+                    <InputLabel for="role_id" value="Должность" />
+                    <select v-model="formPerson.role_id" v-for="data in roleList"
+                        id="role_id"
+                        class="truncate focus:ring-0 rounded-10 bg-dark-gray mt-1 block w-full pr-[30px] pl-[15px] py-[10px]"
+                        required
+                        autocomplete="role_id"
+                    >
+                    <option value="" disabled selected>Выберите должность</option>
+                    <option :value="role.id" v-for="(role, key) in data">
+                        {{ role.name }}
+                    </option>
+                    </select>
                 </div>
             </div>
-
-            <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
-
+        </form>
+        <div class="flex items-center">
+                <PrimaryButton class="flex items-center justify-center w-full text-white" :disabled="formPerson.processing">Сохранить изменения</PrimaryButton>
                 <Transition
                     enter-active-class="transition ease-in-out"
                     enter-from-class="opacity-0"
                     leave-active-class="transition ease-in-out"
                     leave-to-class="opacity-0"
                 >
-                    <p
-                        v-if="form.recentlySuccessful"
-                        class="text-sm text-gray-600"
-                    >
-                        Saved.
-                    </p>
+                <p v-if="formPerson.recentlySuccessful" class="text-sm text-gray-500">Сохранено</p>
                 </Transition>
             </div>
-        </form>
+        </header>
     </section>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      departmentList: '',
+      roleList: '',
+    };
+  },
+  methods: {
+    async getDepartmentList() {
+      await axios.get('/api/departments').then((res) => {
+        this.departmentList = res.data;
+      });
+    },
+    async getRoleList() {
+      await axios.get('/api/roles').then((res) => {
+        this.roleList = res.data;
+      });
+    },
+  },
+  mounted() {
+    this.getDepartmentList();
+    this.getRoleList();
+  }
+}
+</script>

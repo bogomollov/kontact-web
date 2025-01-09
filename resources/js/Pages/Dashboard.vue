@@ -4,30 +4,44 @@ import TextInput from "@/Components/TextInput.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link } from "@inertiajs/vue3";
 import { ref } from 'vue';
+import axios from 'axios';
 
 const selectedUser = ref(null);
+const queryList = ref(null);
 
-const setUser = (user) => {
+const setUser = (user, clearQueryList = false) => {
   selectedUser.value = user;
+  if (clearQueryList) {
+    document.getElementById('querySearch').value = '';
+    queryList.value = null;
+  }
+};
+const getSearchList = async (query) => {
+  await axios.get('/api/users/search', { params: { query } }).then((res) => {
+    queryList.value = res.data;
+  });
 };
 </script>
 
 <template>
   <Head title="Web" />
   <div class="flex h-screen">
-    <div class="flex flex-col w-max h-screen pt-20 gap-[15px] border-r border-neutral-200">
-        <div class="flex flex-col gap-30 w-max">
+    <div class="flex flex-col min-w-[400px] h-screen pt-20 gap-[15px] border-r border-neutral-200">
+        <div class="flex flex-col gap-30 w-full">
             <AuthenticatedLayout/>
-            <div class="flex px-20">
+            <div class="flex flex-col px-20">
                 <label class="flex-1">
                 <TextInput
+                    id="querySearch"
                     type="text"
+                    name="query"
                     class="block px-[12px] py-[12px] border-neutral-300 bg-transparent pl-[58px] w-full text-base"
                     placeholder="Поиск"
+                    @input="event => getSearchList(event.target.value)"
                 />
                 </label>
             </div>
-            <div class="flex px-20 items-center justify-between border-b pb-[15px]">
+            <div v-show="!queryList" class="flex px-20 items-center justify-between border-b pb-[15px]">
                 <Link :href="route('logout')" as="button">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-15 hover:bg-neutral-100 w-full rounded-[10px] px-[20px] py-[5px]">
@@ -50,25 +64,38 @@ const setUser = (user) => {
                 </Link>
             </div>
         </div>
-        <div v-if="userList">
+        <div v-if="!queryList && userList">
             <div v-for="data in userList" class="flex flex-col pl-[20px] pr-[5px] overflow-y-scroll chat">
             <div v-for="(user, key) in data" @click="setUser(user)" :class="['flex items-center justify-between h-[70px] w-full rounded-[15px] pl-[10px]', user.id === selectedUser?.id ? 'bg-neutral-200' : 'hover:bg-neutral-100']">
                 <div class="flex items-center gap-15">
-                    <img src="../../images/avatar.png">
+                    <img :src="`/storage/${user.id}.png`">
                     <h5>{{ user.firstName }} {{ user.lastName }}</h5>
                 </div>
             </div>
             </div>
         </div>
-        <h5 v-else class="flex items-center justify-center">Нет сохраненных чатов</h5>
+        <div v-else-if="queryList">
+          <div v-for="data in queryList" class="flex flex-col pl-[20px] pr-[5px] overflow-y-scroll chat">
+            <div v-for="(user, key) in data" @click="setUser(user, true)" :class="['flex items-center justify-between h-[70px] w-full rounded-[15px] pl-[10px]', user.id === selectedUser?.id ? 'bg-neutral-200' : 'hover:bg-neutral-100']">
+              <div class="flex items-center gap-15">
+                <img :src="`/storage/${user.id}.png`">
+                  <div class="flex flex-col">
+                    <h5>{{ user.firstName }} {{ user.lastName }}</h5>
+                    <p class="text-blue-500">@{{ user.username }}</p>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h5 v-else="!userList" class="flex items-center justify-center">Нет сохраненных чатов</h5>
     </div>
     <div v-if="selectedUser" class="flex flex-col w-full h-screen">
     <div
       class="flex w-full items-center justify-between h-[95px] py-[17.5px] px-30 mb-30 border-b border-neutral-200"
     >
       <div class="flex gap-15 items-center">
-        <img src="../../images/avatar.png" />
-        <div>
+        <img :src="`/storage/${selectedUser.id}.png`" />
+        <div v-if="selectedUser">
           <h4 class="text-neutral-950">{{ selectedUser.firstName }} {{ selectedUser.lastName }}</h4>
           <p v-if="selectedUser.last_activity" class="text-base text-neutral-500">в сети</p>
           <p v-else class="text-base text-neutral-500">офлайн</p>
@@ -235,7 +262,7 @@ const setUser = (user) => {
       </div>
     </div>
   </div>
-  <div v-else class="flex w-full bg-neutral-50">
+  <div v-show="!selectedUser" class="flex w-full bg-neutral-50">
     <h4 class="flex items-center w-full justify-center">Выберите собеседника из списка, представленного в левой части экрана или найдите его через поиск</h4>
   </div>
   </div>
@@ -245,6 +272,7 @@ export default {
   data() {
     return {
       userList: '',
+      queryList: '',
     };
   },
   methods: {

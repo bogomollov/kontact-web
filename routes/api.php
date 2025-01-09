@@ -12,4 +12,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('departments', DepartmentController::class);
 Route::apiResource('roles', RoleController::class);
-Route::apiResource('users', UserController::class);
+
+Route::get('users', [UserController::class, 'index']);
+Route::get('users/search', [UserController::class, 'search']);
+Route::get('users/{user}', [UserController::class, 'show']);
+Route::post('users', [UserController::class, 'store']);
