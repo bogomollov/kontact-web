@@ -24,6 +24,7 @@ class Account extends Authenticatable
         'password',
         'email',
         'phone',
+        'role',
         'remember_token',
     ];
 

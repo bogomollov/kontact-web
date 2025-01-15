@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -27,3 +28,10 @@ Route::get('users/search', [UserController::class, 'search']);
 Route::get('users/{user}', [UserController::class, 'show']);
 Route::post('users', [UserController::class, 'store']);
 Route::put('users/{user}', [UserController::class, 'update']);
+Route::delete('users/{user}', [UserController::class, 'destroy']);
+
+Route::get('accounts', [AccountController::class, 'index']);
+Route::get('accounts/{account}', [AccountController::class, 'show']);
+Route::post('accounts', [AccountController::class, 'store']);
+Route::put('accounts/{account}', [AccountController::class, 'update']);
+Route::delete('accounts/{account}', [AccountController::class, 'destroy']);

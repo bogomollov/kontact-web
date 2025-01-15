@@ -44,10 +44,10 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    // Route::get('/admin', function () {
-    //     return Inertia::render('Admin');
-    // })->name('admin');
-
+    Route::get('/admin', function () {
+        return Inertia::render('Admin');
+    })->name('admin');
+    
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::patch('/profile/account', [ProfileController::class, 'updateAccount'])->name('profile.account.update');
