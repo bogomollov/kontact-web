@@ -1,5 +1,4 @@
 <script setup>
-import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
@@ -35,40 +34,27 @@ const updatePassword = () => {
 
 <template>
     <section>
-        <header>
-            <h2 class="text-lg font-medium text-gray-900">
-                Update Password
-            </h2>
-
-            <p class="mt-1 text-sm text-gray-600">
-                Ensure your account is using a long, random password to stay
-                secure.
-            </p>
-        </header>
-
-        <form @submit.prevent="updatePassword" class="mt-6 space-y-6">
-            <div>
-                <InputLabel for="current_password" value="Current Password" />
-
-                <TextInput
-                    id="current_password"
-                    ref="currentPasswordInput"
-                    v-model="form.current_password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    autocomplete="current-password"
-                />
-
-                <InputError
-                    :message="form.errors.current_password"
-                    class="mt-2"
-                />
+        <header class="flex flex-col gap-[20px] p-[30px] bg-white border border-neutral-200 rounded-lg">
+            <div class="flex flex-col gap-[10px]">
+                <h4 class="font-medium">Изменить пароль</h4>
+                <p class="text-gray-500">Используйте длинный пароль</p>
             </div>
-
-            <div>
-                <InputLabel for="password" value="New Password" />
-
-                <TextInput
+            <form @submit.prevent="updatePassword">
+            <div class="flex flex-col gap-[15px]">
+                <div class="flex flex-col gap-[10px]">
+                    <InputLabel for="current_password" value="Текущий пароль" />
+                    <TextInput
+                        id="current_password"
+                        ref="currentPasswordInput"
+                        v-model="form.current_password"
+                        type="password"
+                        class="mt-1 block w-full"
+                        autocomplete="current-password"
+                    />
+                </div>
+                <div class="flex flex-col gap-[10px]">
+                    <InputLabel for="password" value="Новый пароль" />
+                    <TextInput
                     id="password"
                     ref="passwordInput"
                     v-model="form.password"
@@ -76,47 +62,32 @@ const updatePassword = () => {
                     class="mt-1 block w-full"
                     autocomplete="new-password"
                 />
-
-                <InputError :message="form.errors.password" class="mt-2" />
+                </div>
+                <div class="flex flex-col gap-[10px]">
+                    <InputLabel
+                        for="password_confirmation"
+                        value="Подтверждение пароля"
+                    />
+                    <TextInput
+                        id="password_confirmation"
+                        v-model="form.password_confirmation"
+                        type="password"
+                        class="mt-1 block w-full"
+                        autocomplete="new-password"
+                    />
+                </div>
             </div>
-
-            <div>
-                <InputLabel
-                    for="password_confirmation"
-                    value="Confirm Password"
-                />
-
-                <TextInput
-                    id="password_confirmation"
-                    v-model="form.password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    autocomplete="new-password"
-                />
-
-                <InputError
-                    :message="form.errors.password_confirmation"
-                    class="mt-2"
-                />
-            </div>
-
-            <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
-
-                <Transition
-                    enter-active-class="transition ease-in-out"
-                    enter-from-class="opacity-0"
-                    leave-active-class="transition ease-in-out"
-                    leave-to-class="opacity-0"
-                >
-                    <p
-                        v-if="form.recentlySuccessful"
-                        class="text-sm text-gray-600"
-                    >
-                        Saved.
-                    </p>
-                </Transition>
+            <div class="flex items-center mt-[36px]">
+            <PrimaryButton class="flex items-center justify-center w-full text-white" :disabled="form.processing">{{ form.recentlySuccessful ? 'Сохранено' : 'Сохранить изменения'}}</PrimaryButton>
+            <Transition
+                enter-active-class="transition ease-in-out"
+                enter-from-class="opacity-0"
+                leave-active-class="transition ease-in-out"
+                leave-to-class="opacity-0"
+            >
+            </Transition>
             </div>
         </form>
+        </header>
     </section>
 </template>

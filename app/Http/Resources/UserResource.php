@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Cache as Redis;
 
 class UserResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
         return [
@@ -24,7 +19,7 @@ class UserResource extends JsonResource
             'department_id' => $this->department_id,
             'role_id' => $this->role_id,
             'last_activity' => Redis::get($this->id . '_online'),
-            'username' => Account::find($this->id)->username,
+            'username' => $this->when(Account::find($this->id)->username, Account::find($this->id)->username),
         ];
     }
 }

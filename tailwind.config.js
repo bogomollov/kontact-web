@@ -1,5 +1,7 @@
 // import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
+import scrollbar from 'tailwind-scrollbar';
+import scrollbarhide from 'tailwind-scrollbar-hide';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -10,10 +12,10 @@ export default {
         './resources/js/**/*.vue',
     ],
     theme: {
-        fontFamily: {
-            sans: ['Golos Text', 'sans-serif'],
-        },
         extend: {
+            fontFamily: {
+                sans: ['Golos Text', 'sans-serif'],
+            },
             borderColor: '#e5e5e5',
             spacing: {
                 '8': '8px',
@@ -37,5 +39,5 @@ export default {
         },
     },
 
-    plugins: [forms],
+    plugins: [forms, scrollbarhide, scrollbar],
 };

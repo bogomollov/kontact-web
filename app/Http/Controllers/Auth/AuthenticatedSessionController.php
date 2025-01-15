@@ -29,6 +29,12 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        // if ($request->email == 'admin@admin.com' && $request->password == 'admin') {
+        //     $request->authenticate();
+        //     $request->session()->regenerate();
+        //     return redirect()->intended(route('admin', absolute: false));
+        // }
+
         $request->authenticate();
 
         $request->session()->regenerate();

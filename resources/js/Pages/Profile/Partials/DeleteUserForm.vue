@@ -1,6 +1,5 @@
 <script setup>
 import DangerButton from '@/Components/DangerButton.vue';
-import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import Modal from '@/Components/Modal.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
@@ -17,8 +16,6 @@ const form = useForm({
 
 const confirmUserDeletion = () => {
     confirmingUserDeletion.value = true;
-
-    nextTick(() => passwordInput.value.focus());
 };
 
 const deleteUser = () => {
@@ -32,74 +29,55 @@ const deleteUser = () => {
 
 const closeModal = () => {
     confirmingUserDeletion.value = false;
-
     form.clearErrors();
     form.reset();
 };
 </script>
 
 <template>
-    <section class="space-y-6">
-        <header>
-            <h2 class="text-lg font-medium text-gray-900">
-                Delete Account
-            </h2>
-
-            <p class="mt-1 text-sm text-gray-600">
-                Once your account is deleted, all of its resources and data will
-                be permanently deleted. Before deleting your account, please
-                download any data or information that you wish to retain.
-            </p>
+    <section>
+        <header class="flex flex-col gap-[20px] p-[30px] bg-white border border-neutral-200 rounded-lg">
+            <div class="flex flex-col gap-[10px]">
+                <h4 class="font-medium">Удаление аккаунта</h4>
+                <p class="text-gray-500">Безвозвратное удаление</p>
+            </div>
+            <DangerButton @click="confirmUserDeletion">Удалить аккаунт</DangerButton>
         </header>
-
-        <DangerButton @click="confirmUserDeletion">Delete Account</DangerButton>
-
         <Modal :show="confirmingUserDeletion" @close="closeModal">
-            <div class="p-6">
-                <h2
-                    class="text-lg font-medium text-gray-900"
-                >
-                    Are you sure you want to delete your account?
-                </h2>
-
-                <p class="mt-1 text-sm text-gray-600">
-                    Once your account is deleted, all of its resources and data
-                    will be permanently deleted. Please enter your password to
-                    confirm you would like to permanently delete your account.
+            <div class="flex flex-col gap-[10px] p-6">
+                <h4 class="font-medium">
+                    Вы уверены, что хотите удалить свою учетную запись?
+                </h4>
+                <p class="text-gray-500">
+                    После удаления вашего аккаунта все его ресурсы и данные будут удалены навсегда. Введите пароль, чтобы подтвердить, что вы хотите навсегда удалить свой аккаунт.
                 </p>
-
-                <div class="mt-6">
+                <div class="mt-[10px]">
                     <InputLabel
                         for="password"
-                        value="Password"
+                        value="Пароль"
                         class="sr-only"
                     />
-
                     <TextInput
                         id="password"
                         ref="passwordInput"
                         v-model="form.password"
                         type="password"
                         class="mt-1 block w-3/4"
-                        placeholder="Password"
+                        placeholder="Пароль"
                         @keyup.enter="deleteUser"
                     />
-
-                    <InputError :message="form.errors.password" class="mt-2" />
                 </div>
-
-                <div class="mt-6 flex justify-end">
+                <div class="mt-[10px] flex justify-end">
                     <SecondaryButton @click="closeModal">
-                        Cancel
+                        Отмена
                     </SecondaryButton>
-
                     <DangerButton
                         class="ms-3"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
                         @click="deleteUser"
                     >
-                        Delete Account
+                        Удалить аккаунт
                     </DangerButton>
                 </div>
             </div>

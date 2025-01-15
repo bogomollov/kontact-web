@@ -1,9 +1,10 @@
 <script setup>
-import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Link, useForm, usePage } from '@inertiajs/vue3';
+import { useForm, usePage } from '@inertiajs/vue3';
+import { ref } from 'vue';
+import axios from 'axios';
 
 defineProps({
     mustVerifyEmail: {
@@ -15,22 +16,34 @@ defineProps({
 });
 
 const user = usePage().props.auth.user;
-const person = usePage().props.person;
+
+const inputAvatar = ref(null);
+const uploadAvatar = ref(null);
+const ObjectURL = ref(null);
 
 const formPerson = useForm({
-    photo: person.photo,
-    firstName: person.firstName,
-    lastName: person.lastName,
-    middleName: person.middleName,
-    department_id: person.department_id,
-    role_id: person.role_id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    middleName: user.middleName,
+    department_id: user.department_id,
+    role_id: user.role_id,
 });
 
-const formAccount = useForm({
-    username: user.username,
-    email: user.email,
-    phone: user.phone,
-});
+const uploadImage = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    uploadAvatar.value = file;
+    ObjectURL.value = URL.createObjectURL(file);
+}
+
+const applyChanges = () => {
+    if (uploadAvatar.value) {
+        const formData = new FormData();
+        formData.append('image', uploadAvatar.value);
+        axios.post(route('profile.upload-image'), formData);
+    }
+    formPerson.patch(route('profile.update'));
+}
 </script>
 
 <template>
@@ -40,12 +53,15 @@ const formAccount = useForm({
                 <h4 class="font-medium">Информация профиля</h4>
                 <p class="text-gray-500">Обновите сведения своего профиля</p>
             </div>
-            <form
-            @submit.prevent="form.patch(route('profile.update'))">
+            <form @submit.prevent="applyChanges">
             <div class="flex flex-col gap-[15px]">
                 <div class="flex flex-col gap-[10px]">
                     <InputLabel value="Фотография" />
-                    <img :src="`/storage/${$page.props.auth.user.id}.png`" class="w-[60px] h-[60px]">
+                    <div class="relative">
+                        <img v-show="!uploadAvatar" :src="`/storage/${$page.props.auth.user.id}.webp`" class="border border-neutral-500 rounded-full w-[60px] h-[60px] object-cover cursor-pointer" @click="inputAvatar.click()">
+                        <img v-show="uploadAvatar" :src="ObjectURL" class="border border-neutral-500 rounded-full w-[60px] h-[60px] object-cover cursor-pointer">
+                        <input type="file" ref="inputAvatar" class="hidden" accept="image/*" @change="uploadImage">
+                    </div>
                 </div>
                 <div class="flex flex-col gap-[10px]">
                     <InputLabel for="firstName" value="Имя" />
@@ -109,18 +125,17 @@ const formAccount = useForm({
                     </select>
                 </div>
             </div>
+            <div class="flex items-center mt-[30px]">
+            <PrimaryButton class="flex items-center justify-center w-full text-white" :disabled="formPerson.processing">{{ formPerson.recentlySuccessful ? 'Сохранено' : 'Сохранить изменения'}}</PrimaryButton>
+            <Transition
+                enter-active-class="transition ease-in-out"
+                enter-from-class="opacity-0"
+                leave-active-class="transition ease-in-out"
+                leave-to-class="opacity-0"
+            >
+            </Transition>
+        </div>
         </form>
-        <div class="flex items-center">
-                <PrimaryButton class="flex items-center justify-center w-full text-white" :disabled="formPerson.processing">Сохранить изменения</PrimaryButton>
-                <Transition
-                    enter-active-class="transition ease-in-out"
-                    enter-from-class="opacity-0"
-                    leave-active-class="transition ease-in-out"
-                    leave-to-class="opacity-0"
-                >
-                <p v-if="formPerson.recentlySuccessful" class="text-sm text-gray-500">Сохранено</p>
-                </Transition>
-            </div>
         </header>
     </section>
 </template>

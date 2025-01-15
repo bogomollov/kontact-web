@@ -25,7 +25,7 @@ const getSearchList = async (query) => {
 
 <template>
   <Head title="Web" />
-  <div class="flex h-screen">
+  <div class="flex overflow-y-hidden">
     <div class="flex flex-col min-w-[400px] h-screen pt-20 gap-[15px] border-r border-neutral-200">
         <div class="flex flex-col gap-30 w-full">
             <AuthenticatedLayout/>
@@ -64,21 +64,24 @@ const getSearchList = async (query) => {
                 </Link>
             </div>
         </div>
-        <div v-if="!queryList && userList">
-            <div v-for="data in userList" class="flex flex-col pl-[20px] pr-[5px] overflow-y-scroll chat">
+        <div v-if="!queryList && userList" class="overflow-y-scroll">
+            <div v-for="data in userList" class="flex flex-col pl-[20px] pr-[5px]">
             <div v-for="(user, key) in data" @click="setUser(user)" :class="['flex items-center justify-between h-[70px] w-full rounded-[15px] pl-[10px]', user.id === selectedUser?.id ? 'bg-neutral-200' : 'hover:bg-neutral-100']">
                 <div class="flex items-center gap-15">
-                    <img :src="`/storage/${user.id}.png`">
+                    <div class="relative">
+                      <img :src="`/storage/${user.id}.webp`" class="w-[55px] h-[55px] rounded-full">
+                      <div v-show="user.last_activity" class="absolute bottom-1 right-1 rounded-full border border-white bg-blue-500 w-[12px] h-[12px]"></div>
+                    </div>
                     <h5>{{ user.firstName }} {{ user.lastName }}</h5>
                 </div>
             </div>
             </div>
         </div>
-        <div v-else-if="queryList">
-          <div v-for="data in queryList" class="flex flex-col pl-[20px] pr-[5px] overflow-y-scroll chat">
+        <div v-else-if="queryList" class="overflow-y-scroll">
+          <div v-for="data in queryList" class="flex flex-col pl-[20px] pr-[5px]">
             <div v-for="(user, key) in data" @click="setUser(user, true)" :class="['flex items-center justify-between h-[70px] w-full rounded-[15px] pl-[10px]', user.id === selectedUser?.id ? 'bg-neutral-200' : 'hover:bg-neutral-100']">
               <div class="flex items-center gap-15">
-                <img :src="`/storage/${user.id}.png`">
+                <img :src="`/storage/${user.id}.webp`" class="w-[55px] h-[55px] rounded-full">
                   <div class="flex flex-col">
                     <h5>{{ user.firstName }} {{ user.lastName }}</h5>
                     <p class="text-blue-500">@{{ user.username }}</p>
@@ -94,7 +97,7 @@ const getSearchList = async (query) => {
       class="flex w-full items-center justify-between h-[95px] py-[17.5px] px-30 mb-30 border-b border-neutral-200"
     >
       <div class="flex gap-15 items-center">
-        <img :src="`/storage/${selectedUser.id}.png`" />
+        <img :src="`/storage/${selectedUser.id}.webp`" class="w-[55px] h-[55px] rounded-full" />
         <div v-if="selectedUser">
           <h4 class="text-neutral-950">{{ selectedUser.firstName }} {{ selectedUser.lastName }}</h4>
           <p v-if="selectedUser.last_activity" class="text-base text-neutral-500">в сети</p>
@@ -126,7 +129,7 @@ const getSearchList = async (query) => {
         />
       </svg>
     </div>
-    <div class="flex flex-col pr-15 pl-30 h-[100%] overflow-y-scroll chat">
+    <div class="flex flex-col pr-15 pl-30 h-[100%] overflow-y-scroll">
       <div class="message message-in">
         <a>message-in</a>
         <div class="flex gap-[8px] items-center justify-center">
@@ -193,7 +196,7 @@ const getSearchList = async (query) => {
     >
       <TextAreaInput
         type="text"
-        class="overflow-y-scroll chat"
+        class="overflow-y-scroll"
         placeholder="Сообщение"
       />
       <div class="flex w-full justify-between items-center">

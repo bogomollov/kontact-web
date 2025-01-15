@@ -2,17 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    @apply scrollbar scrollbar-thumb-neutral-300 scrollbar-track-neutral-100;
+}
+
 html, body {
-    scrollbar-color: transparent transparent;
+    @apply h-full;
 }
 
 body {
-    min-height: 100vh;
     @apply antialiased bg-white;
+    font-synthesis: none;
 }
 
-.chat:hover {
-    scrollbar-color: #a3a3a3 transparent;
+#app {
+    @apply flex flex-col min-h-screen w-full;
 }
 
 @layer base {

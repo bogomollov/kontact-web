@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreRequest;
+use App\Http\Requests\User\StoreRequest;
+use App\Http\Requests\User\UpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\Account;
 use App\Models\User;
@@ -22,11 +23,11 @@ class UserController extends Controller
     }
 
     public function show(User $user) {
-        $cache = Redis::get($user->id);
+        $cache = Redis::get('user_show_' . $user->id);
         if ($cache) return $cache;
         else {
             $cache = new UserResource($user);
-            Redis::put($user->id, $cache, now()->addMinutes(10));
+            Redis::put('user_show_' . $user->id, $cache, now()->addMinutes(10));
             return $cache;
         }
     }
@@ -34,19 +35,37 @@ class UserController extends Controller
     public function search(Request $request) {
         $query = strtolower($request->input('query'));
         if (empty($query)) return null;
-        if ($query[0] == '@' && strlen($query) > 1) {
-            $username = Account::where('username', 'like', '%' . substr($query, 1) . '%')
-                ->take(5)->get();
-            $users = User::whereIn('id', $username->pluck('user_id'))->get();
-        } else {
-            $users = User::where('firstName', 'ilike', '%' . $query . '%')
-                ->orWhere('lastName', 'ilike', '%' . $query . '%')
-                ->take(5)->get();
+        $cache = Redis::get('user_search_' . $query);
+        if ($cache) return $cache;
+        else {
+            if ($query[0] == '@' && strlen($query) > 1) {
+                $username = Account::where('username', 'like', '%' . substr($query, 1) . '%')
+                    ->take(5)->get();
+                $cache = UserResource::collection(User::whereIn('id', $username->pluck('user_id'))->get());
+                Redis::put('user_search_' . $query, $cache, now()->addMinutes(10));
+                return $cache;
+            } else {
+                $users = User::where('firstName', 'ilike', '%' . $query . '%')
+                    ->orWhere('lastName', 'ilike', '%' . $query . '%')
+                    ->take(5)->get();
+                $cache = UserResource::collection($users);
+                Redis::put('user_search_' . $query, $cache, now()->addMinutes(10));
+                return $cache;
+            }
         }
-        return UserResource::collection($users);
     }
 
     public function store(StoreRequest $request) {
         return new UserResource(User::create($request->validated()));
+    }
+
+    public function update(UpdateRequest $request, User $user) {
+        $user->update($request->validated());
+        return new UserResource($user);
+    }
+
+    public function destroy(User $user) {
+        $user->delete();
+        return new UserResource($user);
     }
 }
