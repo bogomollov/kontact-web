@@ -18,7 +18,7 @@ const setUser = (user, clearQueryList = false) => {
 };
 const getSearchList = async (query) => {
   await axios.get('/api/users/search', { params: { query } }).then((res) => {
-    queryList.value = res.data;
+    queryList.value = res.data.data;
   });
 };
 </script>
@@ -64,22 +64,19 @@ const getSearchList = async (query) => {
                 </Link>
             </div>
         </div>
-        <div v-if="!queryList && userList" class="overflow-y-scroll">
-            <div v-for="data in userList" class="flex flex-col pl-[20px] pr-[5px]">
-            <div v-for="(user, key) in data" @click="setUser(user)" :class="['flex items-center justify-between h-[70px] w-full rounded-[15px] pl-[10px]', user.id === selectedUser?.id ? 'bg-neutral-200' : 'hover:bg-neutral-100']">
-                <div class="flex items-center gap-15">
-                    <div class="relative">
-                      <img :src="`/storage/${user.id}.webp`" class="w-[55px] h-[55px] rounded-full">
-                      <div v-show="user.last_activity" class="absolute bottom-1 right-1 rounded-full border border-white bg-blue-500 w-[12px] h-[12px]"></div>
-                    </div>
-                    <h5>{{ user.firstName }} {{ user.lastName }}</h5>
-                </div>
-            </div>
+        <div v-if="!queryList && userList" class="flex flex-col pl-[20px] pr-[5px] overflow-y-scroll">
+          <div v-for="user in userList" @click="setUser(user)" :class="['flex items-center justify-between h-[70px] w-full rounded-[15px] pl-[10px]', user.id === selectedUser?.id ? 'bg-neutral-200' : 'hover:bg-neutral-100']">
+              <div class="flex items-center gap-15">
+                  <div class="relative">
+                    <img :src="`/storage/${user.id}.webp`" class="w-[55px] h-[55px] rounded-full">
+                    <div v-show="user.last_activity" class="absolute bottom-1 right-1 rounded-full border border-white bg-blue-500 w-[12px] h-[12px]"></div>
+                  </div>
+                  <h5>{{ user.firstName }} {{ user.lastName }}</h5>
+              </div>
             </div>
         </div>
-        <div v-else-if="queryList" class="overflow-y-scroll">
-          <div v-for="data in queryList" class="flex flex-col pl-[20px] pr-[5px]">
-            <div v-for="(user, key) in data" @click="setUser(user, true)" :class="['flex items-center justify-between h-[70px] w-full rounded-[15px] pl-[10px]', user.id === selectedUser?.id ? 'bg-neutral-200' : 'hover:bg-neutral-100']">
+        <div v-else-if="queryList" class="flex flex-col pl-[20px] pr-[5px] overflow-y-scroll">
+            <div v-for="user in queryList" @click="setUser(user, true)" :class="['flex items-center justify-between h-[70px] w-full rounded-[15px] pl-[10px]', user.id === selectedUser?.id ? 'bg-neutral-200' : 'hover:bg-neutral-100']">
               <div class="flex items-center gap-15">
                 <img :src="`/storage/${user.id}.webp`" class="w-[55px] h-[55px] rounded-full">
                   <div class="flex flex-col">
@@ -88,7 +85,6 @@ const getSearchList = async (query) => {
                   </div>
               </div>
             </div>
-          </div>
         </div>
         <h5 v-else="!userList" class="flex items-center justify-center">Нет сохраненных чатов</h5>
     </div>
@@ -281,7 +277,7 @@ export default {
   methods: {
     async getUserList() {
       await axios.get('/api/users').then((res) => {
-        this.userList = res.data;
+        this.userList = res.data.data;
       });
     },
   },
