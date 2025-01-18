@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -20,7 +21,7 @@ class AccountFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'phone' => fake()->phoneNumber(),
-            'role' => fake()->randomElement(['admin', 'user']),
+            'role_id' => Role::inRandomOrder()->first()->id,
             'remember_token' => Str::random(10),
         ];
     }

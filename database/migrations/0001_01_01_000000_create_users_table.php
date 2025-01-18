@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('lastName');
             $table->string('middleName');
             $table->foreignId('department_id');
-            $table->foreignId('role_id');
+            $table->foreignId('position_id');
             $table->timestamps();
             $table->softDeletes();
         });

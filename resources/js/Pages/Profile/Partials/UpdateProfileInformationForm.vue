@@ -26,7 +26,7 @@ const formPerson = useForm({
     lastName: user.lastName,
     middleName: user.middleName,
     department_id: user.department_id,
-    role_id: user.role_id,
+    position_id: user.position_id,
 });
 
 const uploadImage = (e) => {
@@ -111,16 +111,16 @@ const applyChanges = () => {
                     </select>
                 </div>
                 <div class="flex flex-col gap-[10px]">
-                    <InputLabel for="role_id" value="Должность" />
-                    <select v-model="formPerson.role_id" v-for="data in roleList"
-                        id="role_id"
+                    <InputLabel for="position_id" value="Должность" />
+                    <select v-model="formPerson.position_id" v-for="data in positionList"
+                        id="position_id"
                         class="truncate focus:ring-0 rounded-10 bg-dark-gray mt-1 block w-full pr-[30px] pl-[15px] py-[10px]"
                         required
-                        autocomplete="role_id"
+                        autocomplete="position_id"
                     >
                     <option value="" disabled selected>Выберите должность</option>
-                    <option :value="role.id" v-for="(role, key) in data">
-                        {{ role.name }}
+                    <option :value="position.id" v-for="(position, key) in data">
+                        {{ position.name }}
                     </option>
                     </select>
                 </div>
@@ -144,7 +144,7 @@ export default {
   data() {
     return {
       departmentList: '',
-      roleList: '',
+      positionList: '',
     };
   },
   methods: {
@@ -153,15 +153,15 @@ export default {
         this.departmentList = res.data;
       });
     },
-    async getRoleList() {
-      await axios.get('/api/roles').then((res) => {
-        this.roleList = res.data;
+    async getPositionList() {
+      await axios.get('/api/positions').then((res) => {
+        this.positionList = res.data;
       });
     },
   },
   mounted() {
     this.getDepartmentList();
-    this.getRoleList();
+    this.getPositionList();
   }
 }
 </script>

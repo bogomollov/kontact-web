@@ -11,7 +11,7 @@ const form = useForm({
   lastName: "",
   middleName: "",
   department_id: "",
-  role_id: "",
+  position_id: "",
   username: "",
   password: "",
   email: "",
@@ -107,21 +107,21 @@ const submit = () => {
             <InputError class="mt-2" :message="form.errors.department_id" />
           </div>
           <div class="w-full">
-            <InputLabel for="role_id" value="Должность" />
+            <InputLabel for="position_id" value="Должность" />
 
-            <select v-model="form.role_id" v-for="data in roleList"
-              id="role_id"
+            <select v-model="form.position_id" v-for="data in roleList"
+              id="position_id"
               class="truncate focus:ring-0 rounded-10 bg-dark-gray mt-1 block w-full pr-[30px] pl-[15px] py-[10px]"
               required
-              autocomplete="role_id"
+              autocomplete="position_id"
             >
               <option value="" disabled selected>Выберите должность</option>
-              <option :value="role.id" v-for="(role, key) in data">
-                {{ role.name }}
+              <option :value="position.id" v-for="(position, key) in data">
+                {{ position.name }}
               </option>
             </select>
 
-            <InputError class="mt-2" :message="form.errors.role_id" />
+            <InputError class="mt-2" :message="form.errors.position_id" />
           </div>
         </div>
       </div>
@@ -193,7 +193,7 @@ const submit = () => {
         </div>
       </div>
       <div class="flex items-center justify-end mt-30 gap-[30px]">
-        <Link :href="route('login')" class="text-p"> Уже есть аккаунт? </Link>
+        <Link :href="route('login')" class="text-p">Уже есть аккаунт?</Link>
 
         <PrimaryButton
           class="text-white"
@@ -211,7 +211,7 @@ export default {
   data() {
     return {
       departmentList: '',
-      roleList: '',
+      positionList: '',
     };
   },
   methods: {
@@ -220,15 +220,15 @@ export default {
         this.departmentList = res.data;
       });
     },
-    async getRoleList() {
-      await axios.get('/api/roles').then((res) => {
-        this.roleList = res.data;
+    async getPositionList() {
+      await axios.get('/api/positions').then((res) => {
+        this.positionList = res.data;
       });
     },
   },
   mounted() {
     this.getDepartmentList();
-    this.getRoleList();
+    this.getPositionList();
   }
 }
 </script>

@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Department;
-use App\Models\Role;
+use App\Models\Position;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserFactory extends Factory
@@ -17,8 +17,8 @@ class UserFactory extends Factory
             'firstName' => $res[0],
             'lastName' => $res[1],
             'middleName' => $res[2],
-            'department_id' => Department::factory(),
-            'role_id' => Role::factory(),
+            'department_id' => Department::inRandomOrder()->first()->id,
+            'position_id' => Position::inRandomOrder()->first()->id,
         ];
     }
 }

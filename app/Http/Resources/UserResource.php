@@ -17,7 +17,7 @@ class UserResource extends JsonResource
             'lastName' => $this->lastName,
             'middleName' => $this->middleName,
             'department_id' => $this->department_id,
-            'role_id' => $this->role_id,
+            'position_id' => $this->position_id,
             'last_activity' => Redis::get($this->id . '_online'),
             'username' => $this->when(Account::find($this->id)->username, Account::find($this->id)->username),
         ];

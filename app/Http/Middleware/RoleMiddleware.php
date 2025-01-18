@@ -8,15 +8,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RoleMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
     public function handle(Request $request, Closure $next): Response
     {
         if ($request->user()) {
-            if ($request->user()->role !== 'admin' && $request->route()->getName() == 'admin') {
+            if (!$request->user()->isAdmin() && $request->route()->getName() == 'admin') {
                 return redirect()->intended(route('dashboard', absolute: false));
             }
         }

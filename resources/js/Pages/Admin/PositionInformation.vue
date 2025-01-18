@@ -11,9 +11,9 @@
                     <a class="font-medium text-center">id</a>
                     <a class="font-medium text-center">name</a>
                 </div>
-                <div v-for="role in roleList" :key="role.id" class="grid grid-cols-2 px-[10px] py-[8px]">
-                    <p class="text-center">{{ role.id }}</p>
-                    <p class="text-center">{{ role.name }}</p>
+                <div v-for="position in positionList" :key="position.id" class="grid grid-cols-2 px-[10px] py-[8px]">
+                    <p class="text-center">{{ position.id }}</p>
+                    <p class="text-center">{{ position.name }}</p>
                 </div>
               </div>
             </div>
@@ -24,18 +24,18 @@
 export default {
   data() {
     return {
-      roleList: '',
+      positionList: '',
     };
   },
   methods: {
-    async getRoleList() {
-      await axios.get('/api/roles').then((res) => {
-        this.roleList = res.data.data;
+    async getPositionList() {
+      await axios.get('/api/positions').then((res) => {
+        this.positionList = res.data.data;
       });
     },
   },
   mounted() {
-    this.getRoleList();
+    this.getPositionList();
   }
 }
 </script>

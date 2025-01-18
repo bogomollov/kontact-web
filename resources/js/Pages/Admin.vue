@@ -1,7 +1,7 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import DepartmentInformation from './Admin/DepartmentInformation.vue';
-import RoleInformation from './Admin/RoleInformation.vue';
+import RoleInformation from './Admin/PositionInformation.vue';
 import AccountInformation from './Admin/AccountInformation.vue';
 import UserInformation from './Admin/UserInformation.vue';
 </script>

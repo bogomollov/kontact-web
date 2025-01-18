@@ -21,7 +21,7 @@
                     <p class="text-center">{{ account.username }}</p>
                     <p class="text-center">{{ account.email }}</p>
                     <p class="text-center">{{ account.phone }}</p>
-                    <p class="text-center">{{ account.role }}</p>
+                    <p class="text-center">{{ account.role_id }}</p>
                 </div>
             </div>
             </div>

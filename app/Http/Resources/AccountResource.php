@@ -16,7 +16,7 @@ class AccountResource extends JsonResource
             'password' => $this->when(!$request->isMethod('get'), $this->password),
             'email' => $this->email,
             'phone' => $this->phone,
-            'role' => $this->role,
+            'role_id' => $this->role_id,
         ];
     }
 }

@@ -13,7 +13,7 @@
                     <a class="font-medium text-center">last_name</a>
                     <a class="font-medium text-center">middle_name</a>
                     <a class="font-medium text-center">department_id</a>
-                    <a class="font-medium text-center">role_id</a>
+                    <a class="font-medium text-center">position_id</a>
                 </div>
                 <div v-for="user in userList" :key="user.id" class="grid grid-cols-6 px-[10px] py-[8px]">
                     <p class="text-center">{{ user.id }}</p>
@@ -21,7 +21,7 @@
                     <p class="text-center">{{ user.lastName }}</p>
                     <p class="text-center">{{ user.middleName }}</p>
                     <p class="text-center">{{ user.department_id }}</p>
-                    <p class="text-center">{{ user.role_id }}</p>
+                    <p class="text-center">{{ user.position_id }}</p>
                 </div>
               </div>
             </div>

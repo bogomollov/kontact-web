@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Enums\Roles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -18,13 +20,17 @@ class Account extends Authenticatable
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function isAdmin(): bool {
+        return Role::find($this->role_id)->name === Roles::Admin;
+    }
+
     protected $fillable = [
         'user_id',
         'username',
         'password',
         'email',
         'phone',
-        'role',
+        'role_id',
         'remember_token',
     ];
 

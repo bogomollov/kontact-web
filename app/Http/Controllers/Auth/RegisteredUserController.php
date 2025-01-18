@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\Roles;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -36,12 +38,13 @@ class RegisteredUserController extends Controller
             'lastName' => 'required|string',
             'middleName' => 'required|string',
             'department_id' => 'required|integer',
-            'role_id' => 'required|integer',
+            'position_id' => 'required|integer',
 
             'username' => 'required|string',
             'password' => ['required', Rules\Password::defaults()],
             'email' => 'required|string|lowercase|email|max:255|unique:'.Account::class,
             'phone' => 'required|string|max:11',
+            'role_id' => 'required|integer',
         ]);
 
         $user = User::create([
@@ -49,7 +52,7 @@ class RegisteredUserController extends Controller
             'lastName' => $request->lastName,
             'middleName' => $request->middleName,
             'department_id' => $request->department_id,
-            'role_id' => $request->role_id,
+            'position_id' => $request->position_id,
         ]);
 
         $account = Account::create([
@@ -58,6 +61,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'email' => $request->email,
             'phone' => $request->phone,
+            'role_id' => Role::where('name', Roles::User)->first()->id,
         ]);
 
         event(new Registered($account));

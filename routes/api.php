@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\PositionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -17,11 +18,11 @@ Route::post('departments', [DepartmentController::class, 'store']);
 Route::put('departments/{department}', [DepartmentController::class, 'update']);
 Route::delete('departments/{department}', [DepartmentController::class, 'destroy']);
 
-Route::get('roles', [RoleController::class, 'index']);
-Route::get('roles/{role}', [RoleController::class, 'show']);
-Route::post('roles', [RoleController::class, 'store']);
-Route::put('roles/{role}', [RoleController::class, 'update']);
-Route::delete('roles/{role}', [RoleController::class, 'destroy']);
+Route::get('positions', [PositionController::class, 'index']);
+Route::get('positions/{position}', [PositionController::class, 'show']);
+Route::post('positions', [PositionController::class, 'store']);
+Route::put('positions/{position}', [PositionController::class, 'update']);
+Route::delete('positions/{position}', [PositionController::class, 'destroy']);
 
 Route::get('users', [UserController::class, 'index']);
 Route::get('users/search', [UserController::class, 'search']);
